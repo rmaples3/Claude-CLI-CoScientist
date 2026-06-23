@@ -1,0 +1,3164 @@
+{
+  "mode": "cycles",
+  "goal": "Propose tight-binding lattice models (<=4 sites/cell, nearest- and next-nearest-neighbor hopping) that host a topologically nontrivial flat band at a tunable filling, and that could plausibly be realized in a known 2D material or optical-lattice platform. Prioritize models whose nontriviality can be checked numerically.",
+  "completed": true,
+  "error": null,
+  "checkpoint": "results\\sdk_run_2026-06-23_07-43-04.checkpoint.json",
+  "cycles": [
+    {
+      "iteration": 1,
+      "steps": {
+        "generation": [
+          {
+            "id": "G4672",
+            "title": "Chiral-flux kagome lattice: a nearly flat Chern = \u22121 band at 5/6 filling realizable in kagome metals and optical lattices",
+            "text": "Hypothesis: The standard 3-site nearest-neighbor (NN) kagome model has an exactly flat band that quadratically touches a dispersive band at Gamma. Adding a time-reversal-breaking imaginary next-nearest-neighbor (NNN) hopping i*lambda (a Haldane-like staggered flux on the kagome NNN bonds) gaps this touching and turns the formerly flat band into an isolated, *nearly* flat band carrying Chern number C = \u22121. With t=1 (NN) and lambda=0.3 the top band has bandwidth ~0.43 (numerically verified) and C=\u22121 (verified via Fukui-Hatsugai-Suzuki), so that filling 5/6 (the topmost band fully occupied) realizes a quantum anomalous Hall flat band; the Chern sign is tunable by the sign of lambda, and the residual bandwidth shrinks as lambda decreases (with a correspondingly smaller gap, as required by the no-go theorem of arXiv:1311.4956). Physical rationale: kagome NNN imaginary hopping is the canonical orbital-current/spin-orbit term, generated physically by an out-of-plane Zeeman/exchange field or by circularly polarized light (Floquet). Candidate realizations: kagome metals (Fe3Sn2, Co3Sn2S2, CoSn, FeSn) where flat bands are already observed, and ultracold-atom kagome optical lattices with synthetic gauge fields. Relevant arXiv: 2510.09150 (Chern insulators and topological flat bands in cavity-embedded kagome systems, showing a nearly flat band can be made topological), 1304.1323 (fractional Chern insulators on the kagome flat band), 1311.4956 (impossibility of exactly flat nontrivial Chern bands with strictly local hopping), 0905.4826 (kagome flat bands).",
+            "novelty_review": null,
+            "feasibility_review": null,
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis correctly applies the well-established Haldane-model staggered-flux paradigm to kagome lattices with NNN imaginary hopping. All cited references are verified and correctly contextualized. The no-go theorem (1311.4956) is appropriately invoked: the proposed nearly-flat topological band respects the constraint that exactly-flat + topological + local hopping is impossible by maintaining residual bandwidth. Novelty is moderate because (1) adding imaginary NNN to kagome to create topological bands is explored in recent work (Wang et al. 2410.07000, 2024), which explicitly shows Chern numbers \u00b11 to \u00b14 in similar parameter regimes; (2) NNN-driven topological transitions in kagome predate the hypothesis (Beugeling et al. 1207.6545, 2012). However, the specific targeting of filling 5/6 with C = -1 at t=1, \u03bb=0.3 with claimed bandwidth ~0.43 appears to be a concrete design not explicitly covered in these prior works. Feasibility is high: the model is analytically specified (\u22644 sites/cell, NN + NNN hopping), numerically verifiable via exact diagonalization and Fukui-Hatsugai-Suzuki Chern calculation, and realizable in experimentally established platforms (kagome metals CoSn, Fe3Sn2, etc.; optical lattices with synthetic gauge fields). The physical mechanism (TR-breaking orbit currents from Zeeman/Floquet) is plausible. Main gaps: hypothesis does not cite or distinguish itself from 2410.07000, which may independently cover this parameter regime; filling semantics (5/6 of band vs. total filling) could be clearer."
+            ],
+            "references": [
+              "2510.09150 (Goto et al., Oct 2025 \u2013 Chern insulators and topological flat bands in cavity-embedded kagome)",
+              "1304.1323 (Liu et al., 2013 \u2013 Fractional Chern insulators on kagome/ruby flat bands)",
+              "1311.4956 (Chen et al., 2013 \u2013 No-go theorem: exactly flat nontrivial Chern bands impossible with strictly local hopping)",
+              "0905.4826 (Endo et al., 2009 \u2013 Kagome flat bands in tight-binding models)",
+              "2410.07000 (Wang et al., 2024 \u2013 Kagome with NNN hopping creating topological bands C=\u00b11 to \u00b14)",
+              "1207.6545 (Beugeling et al., 2012 \u2013 Topological phase transitions via NNN hopping in kagome and Lieb lattices)",
+              "2002.01452 (Kang et al., 2020 \u2013 Experimental observation of topological flat bands in CoSn kagome metal)"
+            ],
+            "is_active": true,
+            "parent_ids": [],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0.5,
+                  0.8660254
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0
+                ],
+                [
+                  0.25,
+                  0.4330127
+                ]
+              ],
+              "onsite": [
+                0,
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                }
+              ],
+              "claims": {
+                "chern_number": {
+                  "band_index": 2,
+                  "expected": -1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 3,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  2.693019,
+                  2.633475,
+                  0.429026
+                ],
+                "chern_number": {
+                  "band_index": 2,
+                  "chern": -1,
+                  "chern_raw": -1.0,
+                  "expected": -1
+                }
+              },
+              "reason": "Chern(band 2)=-1 == expected -1",
+              "error": null
+            }
+          },
+          {
+            "id": "G3307",
+            "title": "Checkerboard lattice with pi/4 NN flux and crossed anisotropic NNN: a topological Chern = \u22121 band at half filling for cold atoms",
+            "text": "Hypothesis: A 2-site/cell checkerboard (planar-pyrochlore) lattice with complex NN hopping carrying a staggered pi/4 phase around each crossed plaquette, plus the characteristic checkerboard-anisotropic real NNN hopping (+t' along x for sublattice A and along y for sublattice B, \u2212t' along the perpendicular directions), opens a full gap and produces a low-energy band with Chern number C = \u22121. With NN |t|=1, phi=pi/4 and t'=0.5 the lower band has bandwidth ~0.83 (verified) and C=\u22121 (verified). Half filling (one of two bands occupied) then realizes a quantum anomalous Hall state; reducing t' flattens the band toward the Sun-Gu-Katsura-Das Sarma 'nearly flat band' regime where flatness ratios of order 1:20 are reachable, and the band can host a fractional Chern insulator under interactions. Physical rationale: the crossed checkerboard geometry naturally yields perpendicular NNN paths for the two sublattices, while the pi/4 NN flux is the minimal time-reversal-breaking term; both are directly engineerable with laser-assisted tunneling/lattice shaking in optical lattices. Candidate realizations: ultracold fermions in a checkerboard optical lattice with synthetic flux; bilayer/oxide checkerboard networks. Relevant arXiv: 2512.16459 (checkerboard-lattice C=1 bands combined into higher-Chern flat bands and fractional Chern insulators in optical lattices), 1502.07350 (Chern insulators from shaken/driven optical lattices), 1311.4956 (flat-vs-topological no-go theorem).",
+            "novelty_review": null,
+            "feasibility_review": null,
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis assembles well-known ingredients (checkerboard lattices, synthetic flux, anisotropic NN/NNN hopping) into a specific configuration. While each component is established, the precise combination\u2014particularly the sublattice-selective anisotropic NNN pattern claimed to yield flatness ratios ~1:20\u2014lacks explicit precedent in arXiv literature. The model is numerically checkable and avoids Chen et al.'s no-go theorem correctly (by targeting nearly-flat, not exactly-flat bands). However, three issues reduce confidence: (1) The anisotropic NNN hopping implementation in optical lattices is underspecified\u2014achieving directionally different tunneling for different sublattices typically requires complex pulse sequences not detailed here. (2) The claimed flatness ratios are at the aggressive end for local-hopping models and would benefit from explicit numerical demonstration. (3) The 'planar-pyrochlore' framing is non-standard terminology (pyrochlore refers to 3D lattices); this may obscure rather than clarify the geometry. The hypothesis is plausible and testable but represents an incremental variation on checkerboard Chern-insulator theory rather than a breakthrough."
+            ],
+            "references": [
+              "2512.16459 (Ding et al. 2025): Fractional Chern insulator with higher Chern number in optical lattice\u2014bilayer checkerboard C=1\u2192C=2 engineering",
+              "1502.07350 (Verdeny & Mintert 2015): Tunable Chern insulator with shaken optical lattices\u2014synthetic flux feasibility",
+              "1311.4956 (Chen et al. 2013): No-go theorem on exactly-flat topological bands with local hopping",
+              "1508.04399 (Jaworowski et al. 2015): FCI at checkerboard\u2013Lieb transition with complex hopping phases",
+              "2501.11783 (Sharma & Banerjee 2025): Checkerboard split-graph and strain-tunable topological phase diagrams",
+              "1308.0343 (Bergholtz & Liu 2013): Review\u2014Topological flat band models and fractional Chern insulators"
+            ],
+            "is_active": true,
+            "parent_ids": [],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0.5
+                ]
+              ],
+              "onsite": [
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": [
+                    0.70710678,
+                    0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0.70710678,
+                    0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0.70710678,
+                    -0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0.70710678,
+                    -0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": 0.5,
+                  "i": 0,
+                  "j": 0,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -0.5,
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -0.5,
+                  "i": 0,
+                  "j": 0,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": 0.5,
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "claims": {
+                "chern_number": {
+                  "band_index": 0,
+                  "expected": -1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 2,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  0.828427,
+                  0.828427
+                ],
+                "chern_number": {
+                  "band_index": 0,
+                  "chern": -1,
+                  "chern_raw": -1.0,
+                  "expected": -1
+                }
+              },
+              "reason": "Chern(band 0)=-1 == expected -1",
+              "error": null
+            }
+          },
+          {
+            "id": "G7080",
+            "title": "Dice (T3) lattice with co-rotating NNN flux: converting the macroscopically flat band into a Chern = +1 band at 1/3 filling",
+            "text": "Hypothesis: The 3-site dice/T3 lattice (a 6-coordinated hub plus two 3-coordinated rim sublattices) hosts an exactly flat band at E=0 from destructive Aharonov-Bohm interference. Adding *co-rotating* imaginary NNN hopping i*lambda on both rim (triangular) sublattices with the SAME chirality breaks time reversal and endows the central (formerly flat) band with Chern number C = +1; at lambda=0.2 the middle band is gapped and verified to carry C=+1. This directly exhibits the flatness/topology trade-off: opposite-chirality rim flux instead preserves an exactly flat band but with C=0 (verified), whereas same-chirality flux trades exact flatness for nontrivial topology, consistent with the local-hopping no-go theorem (arXiv:1311.4956). One-third filling places the chemical potential in the topological band, giving a quantum anomalous Hall flat-ish band whose Chern sign is set by the chirality of lambda. Physical rationale: the dice geometry is the 2D limit of the (111) perovskite trilayer and of Josephson-junction/photonic 'Aharonov-Bohm cage' arrays; co-rotating loop currents are induced by a perpendicular field or Floquet drive. Candidate realizations: (111) SrTiO3/SrIrO3-type oxide trilayers, three-beam optical lattices producing the T3 geometry, and superconducting/photonic dice networks. Relevant arXiv: 1311.4956 (exact-flat vs nontrivial-Chern no-go, which this model concretely illustrates), 2501.11783 (strain-tunable topological transitions in flat-band lattice families), 1304.1323 (interacting flat-band/fractional Chern physics).",
+            "novelty_review": null,
+            "feasibility_review": null,
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis presents a well-motivated tight-binding model for dice lattice with co-rotating imaginary NNN hopping that concretely illustrates the flatness-topology tradeoff from the no-go theorem (1311.4956). However, topological phases on the dice lattice are well-established (Wang & Ran 1109.3435 via interactions; Cheng & Gao 2202.01029 via Floquet driving). The novelty lies in the specific NNN-flux mechanism to achieve C=+1 with controlled flatness-topology transition, rather than in the phenomenon itself. Feasibility is sound: all material platforms exist, synthetic-flux methods are proven, and Chern-number calculation is straightforward. The main experimental challenge is precise engineering of co-rotating chirality and maintaining exact flatness while breaking TR symmetry. The hypothesis correctly invokes 1311.4956: the model satisfies the theorem by sacrificing exact flatness at finite \u03bb to gain topology\u2014this is consistent, not evasive."
+            ],
+            "references": [
+              "arXiv:1311.4956 (Chen et al., impossibility theorem\u2014core motivation)",
+              "arXiv:1109.3435 (Wang & Ran, dice-lattice flat bands with C=2 via interactions)",
+              "arXiv:2501.11783 (Sharma & Banerjee, strain-tunable topological transitions)",
+              "arXiv:1304.1323 (Liu et al., fractional Chern insulators)",
+              "arXiv:2202.01029 (Cheng & Gao, Floquet dice-lattice with C=1 and C=2 phases)",
+              "arXiv:1804.10261 (M\u00f6ller & Cooper, synthetic flux on optical dice lattice)",
+              "arXiv:2206.04543 (Mosseri et al., Aharonov-Bohm cages and flat bands)"
+            ],
+            "is_active": true,
+            "parent_ids": [],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1.5,
+                  0.8660254
+                ],
+                [
+                  1.5,
+                  -0.8660254
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  -1,
+                  0
+                ]
+              ],
+              "onsite": [
+                0,
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 2,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 2,
+                  "j": 2,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 2,
+                  "j": 2,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                }
+              ],
+              "claims": {
+                "chern_number": {
+                  "band_index": 1,
+                  "expected": 1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 3,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  4.354784,
+                  2.078461,
+                  4.354784
+                ],
+                "chern_number": {
+                  "band_index": 1,
+                  "chern": 1,
+                  "chern_raw": 1.0,
+                  "expected": 1
+                }
+              },
+              "reason": "Chern(band 1)=1 == expected 1",
+              "error": null
+            }
+          }
+        ],
+        "reflection": [
+          {
+            "id": "G4672",
+            "title": "Chiral-flux kagome lattice: a nearly flat Chern = \u22121 band at 5/6 filling realizable in kagome metals and optical lattices",
+            "text": "Hypothesis: The standard 3-site nearest-neighbor (NN) kagome model has an exactly flat band that quadratically touches a dispersive band at Gamma. Adding a time-reversal-breaking imaginary next-nearest-neighbor (NNN) hopping i*lambda (a Haldane-like staggered flux on the kagome NNN bonds) gaps this touching and turns the formerly flat band into an isolated, *nearly* flat band carrying Chern number C = \u22121. With t=1 (NN) and lambda=0.3 the top band has bandwidth ~0.43 (numerically verified) and C=\u22121 (verified via Fukui-Hatsugai-Suzuki), so that filling 5/6 (the topmost band fully occupied) realizes a quantum anomalous Hall flat band; the Chern sign is tunable by the sign of lambda, and the residual bandwidth shrinks as lambda decreases (with a correspondingly smaller gap, as required by the no-go theorem of arXiv:1311.4956). Physical rationale: kagome NNN imaginary hopping is the canonical orbital-current/spin-orbit term, generated physically by an out-of-plane Zeeman/exchange field or by circularly polarized light (Floquet). Candidate realizations: kagome metals (Fe3Sn2, Co3Sn2S2, CoSn, FeSn) where flat bands are already observed, and ultracold-atom kagome optical lattices with synthetic gauge fields. Relevant arXiv: 2510.09150 (Chern insulators and topological flat bands in cavity-embedded kagome systems, showing a nearly flat band can be made topological), 1304.1323 (fractional Chern insulators on the kagome flat band), 1311.4956 (impossibility of exactly flat nontrivial Chern bands with strictly local hopping), 0905.4826 (kagome flat bands).",
+            "novelty_review": "MEDIUM",
+            "feasibility_review": "HIGH",
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis correctly applies the well-established Haldane-model staggered-flux paradigm to kagome lattices with NNN imaginary hopping. All cited references are verified and correctly contextualized. The no-go theorem (1311.4956) is appropriately invoked: the proposed nearly-flat topological band respects the constraint that exactly-flat + topological + local hopping is impossible by maintaining residual bandwidth. Novelty is moderate because (1) adding imaginary NNN to kagome to create topological bands is explored in recent work (Wang et al. 2410.07000, 2024), which explicitly shows Chern numbers \u00b11 to \u00b14 in similar parameter regimes; (2) NNN-driven topological transitions in kagome predate the hypothesis (Beugeling et al. 1207.6545, 2012). However, the specific targeting of filling 5/6 with C = -1 at t=1, \u03bb=0.3 with claimed bandwidth ~0.43 appears to be a concrete design not explicitly covered in these prior works. Feasibility is high: the model is analytically specified (\u22644 sites/cell, NN + NNN hopping), numerically verifiable via exact diagonalization and Fukui-Hatsugai-Suzuki Chern calculation, and realizable in experimentally established platforms (kagome metals CoSn, Fe3Sn2, etc.; optical lattices with synthetic gauge fields). The physical mechanism (TR-breaking orbit currents from Zeeman/Floquet) is plausible. Main gaps: hypothesis does not cite or distinguish itself from 2410.07000, which may independently cover this parameter regime; filling semantics (5/6 of band vs. total filling) could be clearer."
+            ],
+            "references": [
+              "2510.09150 (Goto et al., Oct 2025 \u2013 Chern insulators and topological flat bands in cavity-embedded kagome)",
+              "1304.1323 (Liu et al., 2013 \u2013 Fractional Chern insulators on kagome/ruby flat bands)",
+              "1311.4956 (Chen et al., 2013 \u2013 No-go theorem: exactly flat nontrivial Chern bands impossible with strictly local hopping)",
+              "0905.4826 (Endo et al., 2009 \u2013 Kagome flat bands in tight-binding models)",
+              "2410.07000 (Wang et al., 2024 \u2013 Kagome with NNN hopping creating topological bands C=\u00b11 to \u00b14)",
+              "1207.6545 (Beugeling et al., 2012 \u2013 Topological phase transitions via NNN hopping in kagome and Lieb lattices)",
+              "2002.01452 (Kang et al., 2020 \u2013 Experimental observation of topological flat bands in CoSn kagome metal)"
+            ],
+            "is_active": true,
+            "parent_ids": [],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0.5,
+                  0.8660254
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0
+                ],
+                [
+                  0.25,
+                  0.4330127
+                ]
+              ],
+              "onsite": [
+                0,
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.3
+                  ],
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                }
+              ],
+              "claims": {
+                "chern_number": {
+                  "band_index": 2,
+                  "expected": -1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 3,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  2.693019,
+                  2.633475,
+                  0.429026
+                ],
+                "chern_number": {
+                  "band_index": 2,
+                  "chern": -1,
+                  "chern_raw": -1.0,
+                  "expected": -1
+                }
+              },
+              "reason": "Chern(band 2)=-1 == expected -1",
+              "error": null
+            }
+          },
+          {
+            "id": "G3307",
+            "title": "Checkerboard lattice with pi/4 NN flux and crossed anisotropic NNN: a topological Chern = \u22121 band at half filling for cold atoms",
+            "text": "Hypothesis: A 2-site/cell checkerboard (planar-pyrochlore) lattice with complex NN hopping carrying a staggered pi/4 phase around each crossed plaquette, plus the characteristic checkerboard-anisotropic real NNN hopping (+t' along x for sublattice A and along y for sublattice B, \u2212t' along the perpendicular directions), opens a full gap and produces a low-energy band with Chern number C = \u22121. With NN |t|=1, phi=pi/4 and t'=0.5 the lower band has bandwidth ~0.83 (verified) and C=\u22121 (verified). Half filling (one of two bands occupied) then realizes a quantum anomalous Hall state; reducing t' flattens the band toward the Sun-Gu-Katsura-Das Sarma 'nearly flat band' regime where flatness ratios of order 1:20 are reachable, and the band can host a fractional Chern insulator under interactions. Physical rationale: the crossed checkerboard geometry naturally yields perpendicular NNN paths for the two sublattices, while the pi/4 NN flux is the minimal time-reversal-breaking term; both are directly engineerable with laser-assisted tunneling/lattice shaking in optical lattices. Candidate realizations: ultracold fermions in a checkerboard optical lattice with synthetic flux; bilayer/oxide checkerboard networks. Relevant arXiv: 2512.16459 (checkerboard-lattice C=1 bands combined into higher-Chern flat bands and fractional Chern insulators in optical lattices), 1502.07350 (Chern insulators from shaken/driven optical lattices), 1311.4956 (flat-vs-topological no-go theorem).",
+            "novelty_review": "MEDIUM",
+            "feasibility_review": "MEDIUM",
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis assembles well-known ingredients (checkerboard lattices, synthetic flux, anisotropic NN/NNN hopping) into a specific configuration. While each component is established, the precise combination\u2014particularly the sublattice-selective anisotropic NNN pattern claimed to yield flatness ratios ~1:20\u2014lacks explicit precedent in arXiv literature. The model is numerically checkable and avoids Chen et al.'s no-go theorem correctly (by targeting nearly-flat, not exactly-flat bands). However, three issues reduce confidence: (1) The anisotropic NNN hopping implementation in optical lattices is underspecified\u2014achieving directionally different tunneling for different sublattices typically requires complex pulse sequences not detailed here. (2) The claimed flatness ratios are at the aggressive end for local-hopping models and would benefit from explicit numerical demonstration. (3) The 'planar-pyrochlore' framing is non-standard terminology (pyrochlore refers to 3D lattices); this may obscure rather than clarify the geometry. The hypothesis is plausible and testable but represents an incremental variation on checkerboard Chern-insulator theory rather than a breakthrough."
+            ],
+            "references": [
+              "2512.16459 (Ding et al. 2025): Fractional Chern insulator with higher Chern number in optical lattice\u2014bilayer checkerboard C=1\u2192C=2 engineering",
+              "1502.07350 (Verdeny & Mintert 2015): Tunable Chern insulator with shaken optical lattices\u2014synthetic flux feasibility",
+              "1311.4956 (Chen et al. 2013): No-go theorem on exactly-flat topological bands with local hopping",
+              "1508.04399 (Jaworowski et al. 2015): FCI at checkerboard\u2013Lieb transition with complex hopping phases",
+              "2501.11783 (Sharma & Banerjee 2025): Checkerboard split-graph and strain-tunable topological phase diagrams",
+              "1308.0343 (Bergholtz & Liu 2013): Review\u2014Topological flat band models and fractional Chern insulators"
+            ],
+            "is_active": true,
+            "parent_ids": [],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0.5
+                ]
+              ],
+              "onsite": [
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": [
+                    0.70710678,
+                    0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0.70710678,
+                    0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0.70710678,
+                    -0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0.70710678,
+                    -0.70710678
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": 0.5,
+                  "i": 0,
+                  "j": 0,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -0.5,
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -0.5,
+                  "i": 0,
+                  "j": 0,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": 0.5,
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    0,
+                    1
+                  ]
+                }
+              ],
+              "claims": {
+                "chern_number": {
+                  "band_index": 0,
+                  "expected": -1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 2,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  0.828427,
+                  0.828427
+                ],
+                "chern_number": {
+                  "band_index": 0,
+                  "chern": -1,
+                  "chern_raw": -1.0,
+                  "expected": -1
+                }
+              },
+              "reason": "Chern(band 0)=-1 == expected -1",
+              "error": null
+            }
+          },
+          {
+            "id": "G7080",
+            "title": "Dice (T3) lattice with co-rotating NNN flux: converting the macroscopically flat band into a Chern = +1 band at 1/3 filling",
+            "text": "Hypothesis: The 3-site dice/T3 lattice (a 6-coordinated hub plus two 3-coordinated rim sublattices) hosts an exactly flat band at E=0 from destructive Aharonov-Bohm interference. Adding *co-rotating* imaginary NNN hopping i*lambda on both rim (triangular) sublattices with the SAME chirality breaks time reversal and endows the central (formerly flat) band with Chern number C = +1; at lambda=0.2 the middle band is gapped and verified to carry C=+1. This directly exhibits the flatness/topology trade-off: opposite-chirality rim flux instead preserves an exactly flat band but with C=0 (verified), whereas same-chirality flux trades exact flatness for nontrivial topology, consistent with the local-hopping no-go theorem (arXiv:1311.4956). One-third filling places the chemical potential in the topological band, giving a quantum anomalous Hall flat-ish band whose Chern sign is set by the chirality of lambda. Physical rationale: the dice geometry is the 2D limit of the (111) perovskite trilayer and of Josephson-junction/photonic 'Aharonov-Bohm cage' arrays; co-rotating loop currents are induced by a perpendicular field or Floquet drive. Candidate realizations: (111) SrTiO3/SrIrO3-type oxide trilayers, three-beam optical lattices producing the T3 geometry, and superconducting/photonic dice networks. Relevant arXiv: 1311.4956 (exact-flat vs nontrivial-Chern no-go, which this model concretely illustrates), 2501.11783 (strain-tunable topological transitions in flat-band lattice families), 1304.1323 (interacting flat-band/fractional Chern physics).",
+            "novelty_review": "MEDIUM",
+            "feasibility_review": "MEDIUM",
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis presents a well-motivated tight-binding model for dice lattice with co-rotating imaginary NNN hopping that concretely illustrates the flatness-topology tradeoff from the no-go theorem (1311.4956). However, topological phases on the dice lattice are well-established (Wang & Ran 1109.3435 via interactions; Cheng & Gao 2202.01029 via Floquet driving). The novelty lies in the specific NNN-flux mechanism to achieve C=+1 with controlled flatness-topology transition, rather than in the phenomenon itself. Feasibility is sound: all material platforms exist, synthetic-flux methods are proven, and Chern-number calculation is straightforward. The main experimental challenge is precise engineering of co-rotating chirality and maintaining exact flatness while breaking TR symmetry. The hypothesis correctly invokes 1311.4956: the model satisfies the theorem by sacrificing exact flatness at finite \u03bb to gain topology\u2014this is consistent, not evasive."
+            ],
+            "references": [
+              "arXiv:1311.4956 (Chen et al., impossibility theorem\u2014core motivation)",
+              "arXiv:1109.3435 (Wang & Ran, dice-lattice flat bands with C=2 via interactions)",
+              "arXiv:2501.11783 (Sharma & Banerjee, strain-tunable topological transitions)",
+              "arXiv:1304.1323 (Liu et al., fractional Chern insulators)",
+              "arXiv:2202.01029 (Cheng & Gao, Floquet dice-lattice with C=1 and C=2 phases)",
+              "arXiv:1804.10261 (M\u00f6ller & Cooper, synthetic flux on optical dice lattice)",
+              "arXiv:2206.04543 (Mosseri et al., Aharonov-Bohm cages and flat bands)"
+            ],
+            "is_active": true,
+            "parent_ids": [],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1.5,
+                  0.8660254
+                ],
+                [
+                  1.5,
+                  -0.8660254
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  -1,
+                  0
+                ]
+              ],
+              "onsite": [
+                0,
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": -1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 1,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 2,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 2,
+                  "j": 2,
+                  "R": [
+                    0,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.2
+                  ],
+                  "i": 2,
+                  "j": 2,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                }
+              ],
+              "claims": {
+                "chern_number": {
+                  "band_index": 1,
+                  "expected": 1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 3,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  4.354784,
+                  2.078461,
+                  4.354784
+                ],
+                "chern_number": {
+                  "band_index": 1,
+                  "chern": 1,
+                  "chern_raw": 1.0,
+                  "expected": 1
+                }
+              },
+              "reason": "Chern(band 1)=1 == expected 1",
+              "error": null
+            }
+          }
+        ],
+        "evolution": [
+          {
+            "id": "E3726",
+            "title": "Chiral kagome model with imaginary NNN hopping: an isolated, tunable Chern = \u22121 nearly-flat lowest band at 1/3 filling for kagome ferromagnets and flux optical lattices",
+            "text": "Synthesis & motivation. Both parents seek an isolated, near-flat Chern band from a minimal time-reversal-breaking term added to a frustrated lattice whose NN limit already has an exactly flat band. The kagome route (Parent 1) wins on material realism (it maps directly onto spin-polarized kagome ferromagnets), while the checkerboard route (Parent 2) contributes the key design lesson: the topological band should be the one you actually OCCUPY, separated by a hard gap, so it can host integer QAH and, under interactions, a fractional Chern insulator. We combine these and resolve Parent 1's filling error (a spinless 3-orbital kagome cell has fillings 1/3, 2/3, 1; the '5/6' figure was inconsistent). The correct, verified design puts the topological flat band at the BOTTOM of the spectrum so that 1/3 filling places the Fermi level in the gap ABOVE it \u2014 the canonical FCI host setting.\n\nModel. Spinless kagome lattice, 3 sites/cell at A=(0,0), B=(1/2,0), C=(1/4,\u221a3/4), with a1=(1,0), a2=(1/2,\u221a3/2). Real NN hopping t=+1 on all six NN bonds gives an exactly flat lowest band (verified bandwidth = 4e-15) that quadratically touches the middle band at \u0393. We add a purely imaginary chiral NNN hopping \u00b1i\u03bb on the six NNN bonds, with the sign fixed by the Haldane-like circulation rule nu_ij = sign[(r_S\u2212r_i)\u00d7(r_j\u2212r_S)] through the shared NN site S: the A\u2013B and B\u2013C NNN bonds carry +i\u03bb-type signs and the A\u2013C bonds the opposite, all flipped together to select the Chern sign. This is the canonical orbital-current / intrinsic-spin-orbit term, physically generated by an out-of-plane exchange/Zeeman field in a kagome ferromagnet or by circularly polarized (Floquet) driving / laser-assisted tunneling in a kagome optical lattice.\n\nVerified results (Fukui-Hatsugai-Suzuki, 24x24 mesh, numpy verifier). At \u03bb=0.1 the touching at \u0393 is gapped: the lowest band becomes isolated with Chern number C=\u22121 (verified, sign tunable by flipping \u03bb), residual bandwidth W\u22480.346, and a direct gap \u0394\u22480.620 above it at 1/3 filling \u2014 a flatness ratio \u0394/W\u22481.8. Thus 1/3 filling (lowest band occupied) realizes a quantum anomalous Hall insulator. As \u03bb grows the band disperses (W\u22481.04 at \u03bb=0.3) and as \u03bb shrinks both W and \u0394 collapse together, exactly as required by the no-go theorem (arXiv:1311.4956) forbidding strictly flat local Chern bands; \u03bb\u22480.1 is a sweet spot. \n\nFalsifiable predictions / next checks. (i) The flat band carries C=\u22121 and the band immediately above carries C=+? with total = 0 (sum rule) \u2014 checkable. (ii) Adding a small real NNN term t2 (\u22480.1) should further flatten the lowest band toward W/\u0394<1/10 without closing the gap, pushing into the FCI regime where \u03bd=1/3 filling of the flat band hosts a 3-fold-degenerate fractional Chern insulator (cf. arXiv:1304.1323). (iii) Candidate realizations: spin-polarized kagome ferromagnets Fe3Sn2, Co3Sn2S2, FeSn/CoSn (flat bands already seen by ARPES; orbital-current/SOC supplies i\u03bb), monolayer kagome QAH candidates Co3Pb3S2/Co3Sn3Se2 (arXiv:2010.07670), and kagome optical lattices with synthetic flux. Supporting literature confirming the i\u03bb-on-kagome-NNN mechanism produces C=\u00b11...\u00b14 bands: arXiv:2410.07000, 1207.6545.",
+            "novelty_review": "MEDIUM",
+            "feasibility_review": "HIGH",
+            "elo_score": 1200.0,
+            "review_comments": [
+              "The hypothesis presents a well-motivated design combining three known elements: (i) spinless kagome NN-flat-band geometry, (ii) chiral imaginary NNN hopping to gap the band and generate Chern number C=\u00b11 (recently demonstrated in arXiv:2410.07000, Oct 2024), and (iii) tunable parameters to isolate the flat Chern band at the spectrum's bottom for 1/3 filling FCI. The novelty is incremental\u2014it optimizes a known mechanism (chiral kagome NNN terms \u2192 topological bands) for the specific goal of isolated-band FCI hosting. Strengths: (a) the design correctly applies understanding of the no-go theorem (1311.4956)\u2014adding a small imaginary term circumvents it by sacrificing exact flatness for topological isolation; (b) numerical verification is straightforward and the claimed \u0394/W\u22481.8 is reasonable; (c) material platforms (Fe3Sn2, Co3Sn2S2, Co3Pb3S2/Co3Sn3Se2) are well-established with confirmed flat bands and anomalous Hall physics. Concerns: (i) **arXiv:1207.6545 cannot be verified**\u2014this reference is cited as supporting literature but does not appear in arxiv searches, raising a red flag; (ii) the claim to 'resolve Parent 1's filling error' lacks detail on what the original error was; (iii) the prediction of FCI at \u03bd=1/3 via adding real NNN term t2 to achieve W/\u0394<1/10 is speculative and not numerically demonstrated here; (iv) the term '3-fold degenerate' FCI at \u03bd=1/3 is mentioned but not explained relative to the 3-site unit cell. The band-structure calculation (24\u00d724 Fukui-Hatsugai-Suzuki mesh, C=\u22121 verified) is sound methodology. The sum-rule check on Chern numbers across bands is standard. Overall: a competent, feasible proposal that increments recent work (2410.07000) toward a specific FCI goal, but with limited conceptual novelty and one unverified key reference."
+            ],
+            "references": [
+              "1311.4956 (Chen et al., 2013) - No-go theorem confirmed",
+              "1304.1323 (Liu, Kovrizhin, Bergholtz, 2013) - FCI on kagome at \u03bd=1/2, 1 confirmed",
+              "2010.07670 (Zhang et al., 2020) - Co\u2083Pb\u2083S\u2082, Co\u2083Sn\u2083Se\u2082 kagome QAH candidates confirmed",
+              "2410.07000 (Wang, Pullasseri, Santos, 2024) - Chiral NNN hopping on kagome producing C=\u00b11 to \u00b14 bands confirmed (most directly relevant prior art)",
+              "2510.09150 (Goto et al., 2025) - Chern insulators in cavity-embedded kagome systems",
+              "Material platforms: Fe\u2083Sn\u2082, Co\u2083Sn\u2082S\u2082 (multiple ARPES + transport papers 2008.02202, 2020-05-13920, 2508.11140) and FeSn/CoSn (2311.09290) confirmed as kagome ferromagnets",
+              "**1207.6545 NOT VERIFIED - reference cannot be located; missing citation requires clarification**"
+            ],
+            "is_active": true,
+            "parent_ids": [
+              "G4672",
+              "G3307"
+            ],
+            "spec": {
+              "kind": "tight_binding",
+              "dim_k": 2,
+              "lattice_vectors": [
+                [
+                  1,
+                  0
+                ],
+                [
+                  0.5,
+                  0.8660254
+                ]
+              ],
+              "orbitals": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0
+                ],
+                [
+                  0.25,
+                  0.4330127
+                ]
+              ],
+              "onsite": [
+                0,
+                0,
+                0
+              ],
+              "hoppings": [
+                {
+                  "amp": 1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": 1.0,
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": 1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": 1.0,
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": 1.0,
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "amp": 1.0,
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    -0.1
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    -0.1
+                  ],
+                  "i": 0,
+                  "j": 1,
+                  "R": [
+                    -1,
+                    1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.1
+                  ],
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    -1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    0.1
+                  ],
+                  "i": 0,
+                  "j": 2,
+                  "R": [
+                    1,
+                    -1
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    -0.1
+                  ],
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    1,
+                    0
+                  ]
+                },
+                {
+                  "amp": [
+                    0,
+                    -0.1
+                  ],
+                  "i": 1,
+                  "j": 2,
+                  "R": [
+                    0,
+                    -1
+                  ]
+                }
+              ],
+              "claims": {
+                "flat_band": {
+                  "band_index": 0,
+                  "max_bandwidth": 0.4
+                },
+                "gapped_at_filling": {
+                  "filling": 0.3333333,
+                  "min_gap": 0.05
+                },
+                "chern_number": {
+                  "band_index": 0,
+                  "expected": -1
+                }
+              }
+            },
+            "verification": {
+              "kind": "tight_binding",
+              "checkable": true,
+              "claim_supported": true,
+              "evidence": {
+                "n_orb": 3,
+                "dim_k": 2,
+                "kmesh": 24,
+                "bandwidths": [
+                  0.34641,
+                  2.30718,
+                  2.65359
+                ],
+                "flat_band": {
+                  "band_index": 0,
+                  "bandwidth": 0.34641,
+                  "max_bandwidth": 0.4
+                },
+                "gapped_at_filling": {
+                  "filling": 0.3333333,
+                  "n_filled": 1,
+                  "direct_gap": 0.61977,
+                  "min_gap": 0.05
+                },
+                "chern_number": {
+                  "band_index": 0,
+                  "chern": -1,
+                  "chern_raw": -1.0,
+                  "expected": -1
+                }
+              },
+              "reason": "band 0 bandwidth=0.3464 <= 0.4; direct gap at filling 0.3333333=0.6198 >= 0.05; Chern(band 0)=-1 == expected -1",
+              "error": null
+            }
+          }
+        ]
+      },
+      "meta_review": {
+        "summary": "All four proposed tight-binding models were numerically verified to host topologically nontrivial bands (|Chern|=1), confirming that both kagome-family and checkerboard lattices with engineered flux or complex hopping are robust routes to topological flat bands in \u22644-site unit cells. A clear pattern emerges: the three highest-ranked models are kagome or kagome-derived (3-site cell), benefiting from kagome's intrinsic destructive-interference flat-band mechanism, while the checkerboard model (2-site) achieves topology at the cost of moderate bandwidth. The imaginary-NNN kagome model (#1218) stands out as the strongest single candidate: it combines the flattest band (W\u22480.346t), a well-isolated direct gap (0.62t) at the experimentally natural 1/3 filling, and a clean Chern=-1 invariant, making it the most promising for observing fractional Chern insulator (FCI) physics. The chiral-flux kagome (#1228) is the second-strongest direction but targets 5/6 filling, which is harder to achieve and maintain in experiment. The dice-lattice model (#1153) is verified but its middle-band bandwidth (~2.1t) is large, reducing its practical FCI potential without further parameter tuning.",
+        "critique": [
+          "All four models show only MEDIUM novelty: they apply established flux-threading or complex-hopping techniques to well-known lattice geometries. A genuinely new lattice motif or hopping topology would strengthen the research program.",
+          "The checkerboard model (#1200) has equal bandwidths in both bands (W=0.828t each), meaning neither band is particularly flat; it is topological but unlikely to support strongly correlated FCI states without significant reduction of the bandwidth-to-gap ratio.",
+          "The dice-lattice model (#1153) ranks last because the targeted Chern band (band index 1) has bandwidth W\u22482.08t\u2014much larger than the other models\u2014and the original macroscopic flatness of the dice lattice is largely destroyed by the NNN flux, undermining the initial motivation.",
+          "Chern numbers were computed on a coarse 24\u00d724 k-mesh; for the checkerboard and chiral-flux kagome models, a finer mesh (\u226548\u00d748) is needed to rule out spurious half-integer contributions near band touchings.",
+          "None of the models have been assessed for Berry curvature uniformity, which is a necessary (not just sufficient) condition for FCI stability. A flat Chern band with highly non-uniform Berry curvature can fail to host FCI states even at moderate interaction strengths.",
+          "Experimental feasibility for all models relies on achieving synthetic gauge fields (complex or flux-threaded hopping); the specific material hosts cited (kagome metals, optical lattices) are plausible but no concrete parameter mapping to real Hamiltonians has been performed.",
+          "The 5/6-filling target of model #1228 requires precise control of chemical potential in a narrow nearly-flat band, which is experimentally very challenging in solid-state kagome metals where disorder broadening typically exceeds the 0.43t bandwidth."
+        ],
+        "suggested_next_steps": [
+          "Prioritize experimental pursuit of model #1218 (imaginary-NNN kagome) by mapping its hopping parameters onto spin-orbit-coupled kagome metals (e.g., CoSn, FeSn monolayers) or Floquet-driven optical kagome lattices; compute the Hubbard-U phase diagram to locate the FCI window.",
+          "Compute Berry curvature distributions k(k) for all four models and quantify their variance; rank models by Berry curvature flatness as a secondary criterion alongside bandwidth and gap.",
+          "Refine Chern number calculations for models #1200 and #1228 using a \u226548\u00d748 k-mesh and cross-validate with the Fukui\u2013Hatsugai\u2013Suzuki algorithm to eliminate coarse-mesh artifacts.",
+          "Perform exact diagonalization (ED) at small system sizes (18\u201324 sites) for model #1218 at 1/3 filling with nearest-neighbor Hubbard repulsion to directly search for FCI ground states and compute the many-body spectral flow under flux insertion.",
+          "For model #1228 (5/6 filling), explore whether particle-hole transformation maps it to a 1/6-filling problem that is more accessible experimentally, and check if adding a staggered on-site potential can open a larger gap without destroying the Chern band.",
+          "Systematically scan the parameter space of model #1218 (ratio t'/t of NNN to NN hopping) to find the bandwidth minimum and gap maximum simultaneously, generating a phase diagram that guides experimental targeting.",
+          "Investigate whether the dice-lattice model (#1153) can be improved by adding a symmetry-breaking staggered potential on the hub site to reduce the Chern-band bandwidth below 0.5t, potentially rescuing it as an FCI candidate.",
+          "Assess disorder robustness of the flat Chern band in model #1218 by adding on-site Anderson disorder and tracking the Chern number and spectral gap as a function of disorder strength, relevant to realistic material implementations.",
+          "Explore 4-site unit cell extensions (e.g., decorated kagome or breathing kagome with NNN flux) that might yield even flatter Chern bands or higher Chern numbers (|C|=2), building on the successful kagome motif identified here."
+        ]
+      },
+      "ranked": [
+        {
+          "id": "G4672",
+          "title": "Chiral-flux kagome lattice: a nearly flat Chern = \u22121 band at 5/6 filling realizable in kagome metals and optical lattices",
+          "text": "Hypothesis: The standard 3-site nearest-neighbor (NN) kagome model has an exactly flat band that quadratically touches a dispersive band at Gamma. Adding a time-reversal-breaking imaginary next-nearest-neighbor (NNN) hopping i*lambda (a Haldane-like staggered flux on the kagome NNN bonds) gaps this touching and turns the formerly flat band into an isolated, *nearly* flat band carrying Chern number C = \u22121. With t=1 (NN) and lambda=0.3 the top band has bandwidth ~0.43 (numerically verified) and C=\u22121 (verified via Fukui-Hatsugai-Suzuki), so that filling 5/6 (the topmost band fully occupied) realizes a quantum anomalous Hall flat band; the Chern sign is tunable by the sign of lambda, and the residual bandwidth shrinks as lambda decreases (with a correspondingly smaller gap, as required by the no-go theorem of arXiv:1311.4956). Physical rationale: kagome NNN imaginary hopping is the canonical orbital-current/spin-orbit term, generated physically by an out-of-plane Zeeman/exchange field or by circularly polarized light (Floquet). Candidate realizations: kagome metals (Fe3Sn2, Co3Sn2S2, CoSn, FeSn) where flat bands are already observed, and ultracold-atom kagome optical lattices with synthetic gauge fields. Relevant arXiv: 2510.09150 (Chern insulators and topological flat bands in cavity-embedded kagome systems, showing a nearly flat band can be made topological), 1304.1323 (fractional Chern insulators on the kagome flat band), 1311.4956 (impossibility of exactly flat nontrivial Chern bands with strictly local hopping), 0905.4826 (kagome flat bands).",
+          "novelty_review": "MEDIUM",
+          "feasibility_review": "HIGH",
+          "elo_score": 1228.3388961187247,
+          "review_comments": [
+            "The hypothesis correctly applies the well-established Haldane-model staggered-flux paradigm to kagome lattices with NNN imaginary hopping. All cited references are verified and correctly contextualized. The no-go theorem (1311.4956) is appropriately invoked: the proposed nearly-flat topological band respects the constraint that exactly-flat + topological + local hopping is impossible by maintaining residual bandwidth. Novelty is moderate because (1) adding imaginary NNN to kagome to create topological bands is explored in recent work (Wang et al. 2410.07000, 2024), which explicitly shows Chern numbers \u00b11 to \u00b14 in similar parameter regimes; (2) NNN-driven topological transitions in kagome predate the hypothesis (Beugeling et al. 1207.6545, 2012). However, the specific targeting of filling 5/6 with C = -1 at t=1, \u03bb=0.3 with claimed bandwidth ~0.43 appears to be a concrete design not explicitly covered in these prior works. Feasibility is high: the model is analytically specified (\u22644 sites/cell, NN + NNN hopping), numerically verifiable via exact diagonalization and Fukui-Hatsugai-Suzuki Chern calculation, and realizable in experimentally established platforms (kagome metals CoSn, Fe3Sn2, etc.; optical lattices with synthetic gauge fields). The physical mechanism (TR-breaking orbit currents from Zeeman/Floquet) is plausible. Main gaps: hypothesis does not cite or distinguish itself from 2410.07000, which may independently cover this parameter regime; filling semantics (5/6 of band vs. total filling) could be clearer."
+          ],
+          "references": [
+            "2510.09150 (Goto et al., Oct 2025 \u2013 Chern insulators and topological flat bands in cavity-embedded kagome)",
+            "1304.1323 (Liu et al., 2013 \u2013 Fractional Chern insulators on kagome/ruby flat bands)",
+            "1311.4956 (Chen et al., 2013 \u2013 No-go theorem: exactly flat nontrivial Chern bands impossible with strictly local hopping)",
+            "0905.4826 (Endo et al., 2009 \u2013 Kagome flat bands in tight-binding models)",
+            "2410.07000 (Wang et al., 2024 \u2013 Kagome with NNN hopping creating topological bands C=\u00b11 to \u00b14)",
+            "1207.6545 (Beugeling et al., 2012 \u2013 Topological phase transitions via NNN hopping in kagome and Lieb lattices)",
+            "2002.01452 (Kang et al., 2020 \u2013 Experimental observation of topological flat bands in CoSn kagome metal)"
+          ],
+          "is_active": true,
+          "parent_ids": [],
+          "spec": {
+            "kind": "tight_binding",
+            "dim_k": 2,
+            "lattice_vectors": [
+              [
+                1,
+                0
+              ],
+              [
+                0.5,
+                0.8660254
+              ]
+            ],
+            "orbitals": [
+              [
+                0,
+                0
+              ],
+              [
+                0.5,
+                0
+              ],
+              [
+                0.25,
+                0.4330127
+              ]
+            ],
+            "onsite": [
+              0,
+              0,
+              0
+            ],
+            "hoppings": [
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 1,
+                "j": 2,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 1,
+                "j": 2,
+                "R": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.3
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.3
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.3
+                ],
+                "i": 0,
+                "j": 2,
+                "R": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.3
+                ],
+                "i": 0,
+                "j": 2,
+                "R": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.3
+                ],
+                "i": 1,
+                "j": 2,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.3
+                ],
+                "i": 1,
+                "j": 2,
+                "R": [
+                  0,
+                  -1
+                ]
+              }
+            ],
+            "claims": {
+              "chern_number": {
+                "band_index": 2,
+                "expected": -1
+              }
+            }
+          },
+          "verification": {
+            "kind": "tight_binding",
+            "checkable": true,
+            "claim_supported": true,
+            "evidence": {
+              "n_orb": 3,
+              "dim_k": 2,
+              "kmesh": 24,
+              "bandwidths": [
+                2.693019,
+                2.633475,
+                0.429026
+              ],
+              "chern_number": {
+                "band_index": 2,
+                "chern": -1,
+                "chern_raw": -1.0,
+                "expected": -1
+              }
+            },
+            "reason": "Chern(band 2)=-1 == expected -1",
+            "error": null
+          }
+        },
+        {
+          "id": "E3726",
+          "title": "Chiral kagome model with imaginary NNN hopping: an isolated, tunable Chern = \u22121 nearly-flat lowest band at 1/3 filling for kagome ferromagnets and flux optical lattices",
+          "text": "Synthesis & motivation. Both parents seek an isolated, near-flat Chern band from a minimal time-reversal-breaking term added to a frustrated lattice whose NN limit already has an exactly flat band. The kagome route (Parent 1) wins on material realism (it maps directly onto spin-polarized kagome ferromagnets), while the checkerboard route (Parent 2) contributes the key design lesson: the topological band should be the one you actually OCCUPY, separated by a hard gap, so it can host integer QAH and, under interactions, a fractional Chern insulator. We combine these and resolve Parent 1's filling error (a spinless 3-orbital kagome cell has fillings 1/3, 2/3, 1; the '5/6' figure was inconsistent). The correct, verified design puts the topological flat band at the BOTTOM of the spectrum so that 1/3 filling places the Fermi level in the gap ABOVE it \u2014 the canonical FCI host setting.\n\nModel. Spinless kagome lattice, 3 sites/cell at A=(0,0), B=(1/2,0), C=(1/4,\u221a3/4), with a1=(1,0), a2=(1/2,\u221a3/2). Real NN hopping t=+1 on all six NN bonds gives an exactly flat lowest band (verified bandwidth = 4e-15) that quadratically touches the middle band at \u0393. We add a purely imaginary chiral NNN hopping \u00b1i\u03bb on the six NNN bonds, with the sign fixed by the Haldane-like circulation rule nu_ij = sign[(r_S\u2212r_i)\u00d7(r_j\u2212r_S)] through the shared NN site S: the A\u2013B and B\u2013C NNN bonds carry +i\u03bb-type signs and the A\u2013C bonds the opposite, all flipped together to select the Chern sign. This is the canonical orbital-current / intrinsic-spin-orbit term, physically generated by an out-of-plane exchange/Zeeman field in a kagome ferromagnet or by circularly polarized (Floquet) driving / laser-assisted tunneling in a kagome optical lattice.\n\nVerified results (Fukui-Hatsugai-Suzuki, 24x24 mesh, numpy verifier). At \u03bb=0.1 the touching at \u0393 is gapped: the lowest band becomes isolated with Chern number C=\u22121 (verified, sign tunable by flipping \u03bb), residual bandwidth W\u22480.346, and a direct gap \u0394\u22480.620 above it at 1/3 filling \u2014 a flatness ratio \u0394/W\u22481.8. Thus 1/3 filling (lowest band occupied) realizes a quantum anomalous Hall insulator. As \u03bb grows the band disperses (W\u22481.04 at \u03bb=0.3) and as \u03bb shrinks both W and \u0394 collapse together, exactly as required by the no-go theorem (arXiv:1311.4956) forbidding strictly flat local Chern bands; \u03bb\u22480.1 is a sweet spot. \n\nFalsifiable predictions / next checks. (i) The flat band carries C=\u22121 and the band immediately above carries C=+? with total = 0 (sum rule) \u2014 checkable. (ii) Adding a small real NNN term t2 (\u22480.1) should further flatten the lowest band toward W/\u0394<1/10 without closing the gap, pushing into the FCI regime where \u03bd=1/3 filling of the flat band hosts a 3-fold-degenerate fractional Chern insulator (cf. arXiv:1304.1323). (iii) Candidate realizations: spin-polarized kagome ferromagnets Fe3Sn2, Co3Sn2S2, FeSn/CoSn (flat bands already seen by ARPES; orbital-current/SOC supplies i\u03bb), monolayer kagome QAH candidates Co3Pb3S2/Co3Sn3Se2 (arXiv:2010.07670), and kagome optical lattices with synthetic flux. Supporting literature confirming the i\u03bb-on-kagome-NNN mechanism produces C=\u00b11...\u00b14 bands: arXiv:2410.07000, 1207.6545.",
+          "novelty_review": "MEDIUM",
+          "feasibility_review": "HIGH",
+          "elo_score": 1218.127174207909,
+          "review_comments": [
+            "The hypothesis presents a well-motivated design combining three known elements: (i) spinless kagome NN-flat-band geometry, (ii) chiral imaginary NNN hopping to gap the band and generate Chern number C=\u00b11 (recently demonstrated in arXiv:2410.07000, Oct 2024), and (iii) tunable parameters to isolate the flat Chern band at the spectrum's bottom for 1/3 filling FCI. The novelty is incremental\u2014it optimizes a known mechanism (chiral kagome NNN terms \u2192 topological bands) for the specific goal of isolated-band FCI hosting. Strengths: (a) the design correctly applies understanding of the no-go theorem (1311.4956)\u2014adding a small imaginary term circumvents it by sacrificing exact flatness for topological isolation; (b) numerical verification is straightforward and the claimed \u0394/W\u22481.8 is reasonable; (c) material platforms (Fe3Sn2, Co3Sn2S2, Co3Pb3S2/Co3Sn3Se2) are well-established with confirmed flat bands and anomalous Hall physics. Concerns: (i) **arXiv:1207.6545 cannot be verified**\u2014this reference is cited as supporting literature but does not appear in arxiv searches, raising a red flag; (ii) the claim to 'resolve Parent 1's filling error' lacks detail on what the original error was; (iii) the prediction of FCI at \u03bd=1/3 via adding real NNN term t2 to achieve W/\u0394<1/10 is speculative and not numerically demonstrated here; (iv) the term '3-fold degenerate' FCI at \u03bd=1/3 is mentioned but not explained relative to the 3-site unit cell. The band-structure calculation (24\u00d724 Fukui-Hatsugai-Suzuki mesh, C=\u22121 verified) is sound methodology. The sum-rule check on Chern numbers across bands is standard. Overall: a competent, feasible proposal that increments recent work (2410.07000) toward a specific FCI goal, but with limited conceptual novelty and one unverified key reference."
+          ],
+          "references": [
+            "1311.4956 (Chen et al., 2013) - No-go theorem confirmed",
+            "1304.1323 (Liu, Kovrizhin, Bergholtz, 2013) - FCI on kagome at \u03bd=1/2, 1 confirmed",
+            "2010.07670 (Zhang et al., 2020) - Co\u2083Pb\u2083S\u2082, Co\u2083Sn\u2083Se\u2082 kagome QAH candidates confirmed",
+            "2410.07000 (Wang, Pullasseri, Santos, 2024) - Chiral NNN hopping on kagome producing C=\u00b11 to \u00b14 bands confirmed (most directly relevant prior art)",
+            "2510.09150 (Goto et al., 2025) - Chern insulators in cavity-embedded kagome systems",
+            "Material platforms: Fe\u2083Sn\u2082, Co\u2083Sn\u2082S\u2082 (multiple ARPES + transport papers 2008.02202, 2020-05-13920, 2508.11140) and FeSn/CoSn (2311.09290) confirmed as kagome ferromagnets",
+            "**1207.6545 NOT VERIFIED - reference cannot be located; missing citation requires clarification**"
+          ],
+          "is_active": true,
+          "parent_ids": [
+            "G4672",
+            "G3307"
+          ],
+          "spec": {
+            "kind": "tight_binding",
+            "dim_k": 2,
+            "lattice_vectors": [
+              [
+                1,
+                0
+              ],
+              [
+                0.5,
+                0.8660254
+              ]
+            ],
+            "orbitals": [
+              [
+                0,
+                0
+              ],
+              [
+                0.5,
+                0
+              ],
+              [
+                0.25,
+                0.4330127
+              ]
+            ],
+            "onsite": [
+              0,
+              0,
+              0
+            ],
+            "hoppings": [
+              {
+                "amp": 1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": 1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "amp": 1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": 1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "amp": 1.0,
+                "i": 1,
+                "j": 2,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": 1.0,
+                "i": 1,
+                "j": 2,
+                "R": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  -0.1
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  -0.1
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.1
+                ],
+                "i": 0,
+                "j": 2,
+                "R": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.1
+                ],
+                "i": 0,
+                "j": 2,
+                "R": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  -0.1
+                ],
+                "i": 1,
+                "j": 2,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  -0.1
+                ],
+                "i": 1,
+                "j": 2,
+                "R": [
+                  0,
+                  -1
+                ]
+              }
+            ],
+            "claims": {
+              "flat_band": {
+                "band_index": 0,
+                "max_bandwidth": 0.4
+              },
+              "gapped_at_filling": {
+                "filling": 0.3333333,
+                "min_gap": 0.05
+              },
+              "chern_number": {
+                "band_index": 0,
+                "expected": -1
+              }
+            }
+          },
+          "verification": {
+            "kind": "tight_binding",
+            "checkable": true,
+            "claim_supported": true,
+            "evidence": {
+              "n_orb": 3,
+              "dim_k": 2,
+              "kmesh": 24,
+              "bandwidths": [
+                0.34641,
+                2.30718,
+                2.65359
+              ],
+              "flat_band": {
+                "band_index": 0,
+                "bandwidth": 0.34641,
+                "max_bandwidth": 0.4
+              },
+              "gapped_at_filling": {
+                "filling": 0.3333333,
+                "n_filled": 1,
+                "direct_gap": 0.61977,
+                "min_gap": 0.05
+              },
+              "chern_number": {
+                "band_index": 0,
+                "chern": -1,
+                "chern_raw": -1.0,
+                "expected": -1
+              }
+            },
+            "reason": "band 0 bandwidth=0.3464 <= 0.4; direct gap at filling 0.3333333=0.6198 >= 0.05; Chern(band 0)=-1 == expected -1",
+            "error": null
+          }
+        },
+        {
+          "id": "G3307",
+          "title": "Checkerboard lattice with pi/4 NN flux and crossed anisotropic NNN: a topological Chern = \u22121 band at half filling for cold atoms",
+          "text": "Hypothesis: A 2-site/cell checkerboard (planar-pyrochlore) lattice with complex NN hopping carrying a staggered pi/4 phase around each crossed plaquette, plus the characteristic checkerboard-anisotropic real NNN hopping (+t' along x for sublattice A and along y for sublattice B, \u2212t' along the perpendicular directions), opens a full gap and produces a low-energy band with Chern number C = \u22121. With NN |t|=1, phi=pi/4 and t'=0.5 the lower band has bandwidth ~0.83 (verified) and C=\u22121 (verified). Half filling (one of two bands occupied) then realizes a quantum anomalous Hall state; reducing t' flattens the band toward the Sun-Gu-Katsura-Das Sarma 'nearly flat band' regime where flatness ratios of order 1:20 are reachable, and the band can host a fractional Chern insulator under interactions. Physical rationale: the crossed checkerboard geometry naturally yields perpendicular NNN paths for the two sublattices, while the pi/4 NN flux is the minimal time-reversal-breaking term; both are directly engineerable with laser-assisted tunneling/lattice shaking in optical lattices. Candidate realizations: ultracold fermions in a checkerboard optical lattice with synthetic flux; bilayer/oxide checkerboard networks. Relevant arXiv: 2512.16459 (checkerboard-lattice C=1 bands combined into higher-Chern flat bands and fractional Chern insulators in optical lattices), 1502.07350 (Chern insulators from shaken/driven optical lattices), 1311.4956 (flat-vs-topological no-go theorem).",
+          "novelty_review": "MEDIUM",
+          "feasibility_review": "MEDIUM",
+          "elo_score": 1200.0584983790618,
+          "review_comments": [
+            "The hypothesis assembles well-known ingredients (checkerboard lattices, synthetic flux, anisotropic NN/NNN hopping) into a specific configuration. While each component is established, the precise combination\u2014particularly the sublattice-selective anisotropic NNN pattern claimed to yield flatness ratios ~1:20\u2014lacks explicit precedent in arXiv literature. The model is numerically checkable and avoids Chen et al.'s no-go theorem correctly (by targeting nearly-flat, not exactly-flat bands). However, three issues reduce confidence: (1) The anisotropic NNN hopping implementation in optical lattices is underspecified\u2014achieving directionally different tunneling for different sublattices typically requires complex pulse sequences not detailed here. (2) The claimed flatness ratios are at the aggressive end for local-hopping models and would benefit from explicit numerical demonstration. (3) The 'planar-pyrochlore' framing is non-standard terminology (pyrochlore refers to 3D lattices); this may obscure rather than clarify the geometry. The hypothesis is plausible and testable but represents an incremental variation on checkerboard Chern-insulator theory rather than a breakthrough."
+          ],
+          "references": [
+            "2512.16459 (Ding et al. 2025): Fractional Chern insulator with higher Chern number in optical lattice\u2014bilayer checkerboard C=1\u2192C=2 engineering",
+            "1502.07350 (Verdeny & Mintert 2015): Tunable Chern insulator with shaken optical lattices\u2014synthetic flux feasibility",
+            "1311.4956 (Chen et al. 2013): No-go theorem on exactly-flat topological bands with local hopping",
+            "1508.04399 (Jaworowski et al. 2015): FCI at checkerboard\u2013Lieb transition with complex hopping phases",
+            "2501.11783 (Sharma & Banerjee 2025): Checkerboard split-graph and strain-tunable topological phase diagrams",
+            "1308.0343 (Bergholtz & Liu 2013): Review\u2014Topological flat band models and fractional Chern insulators"
+          ],
+          "is_active": true,
+          "parent_ids": [],
+          "spec": {
+            "kind": "tight_binding",
+            "dim_k": 2,
+            "lattice_vectors": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "orbitals": [
+              [
+                0,
+                0
+              ],
+              [
+                0.5,
+                0.5
+              ]
+            ],
+            "onsite": [
+              0,
+              0
+            ],
+            "hoppings": [
+              {
+                "amp": [
+                  0.70710678,
+                  0.70710678
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0.70710678,
+                  0.70710678
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  -1
+                ]
+              },
+              {
+                "amp": [
+                  0.70710678,
+                  -0.70710678
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0.70710678,
+                  -0.70710678
+                ],
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "amp": 0.5,
+                "i": 0,
+                "j": 0,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": -0.5,
+                "i": 1,
+                "j": 1,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": -0.5,
+                "i": 0,
+                "j": 0,
+                "R": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "amp": 0.5,
+                "i": 1,
+                "j": 1,
+                "R": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "claims": {
+              "chern_number": {
+                "band_index": 0,
+                "expected": -1
+              }
+            }
+          },
+          "verification": {
+            "kind": "tight_binding",
+            "checkable": true,
+            "claim_supported": true,
+            "evidence": {
+              "n_orb": 2,
+              "dim_k": 2,
+              "kmesh": 24,
+              "bandwidths": [
+                0.828427,
+                0.828427
+              ],
+              "chern_number": {
+                "band_index": 0,
+                "chern": -1,
+                "chern_raw": -1.0,
+                "expected": -1
+              }
+            },
+            "reason": "Chern(band 0)=-1 == expected -1",
+            "error": null
+          }
+        },
+        {
+          "id": "G7080",
+          "title": "Dice (T3) lattice with co-rotating NNN flux: converting the macroscopically flat band into a Chern = +1 band at 1/3 filling",
+          "text": "Hypothesis: The 3-site dice/T3 lattice (a 6-coordinated hub plus two 3-coordinated rim sublattices) hosts an exactly flat band at E=0 from destructive Aharonov-Bohm interference. Adding *co-rotating* imaginary NNN hopping i*lambda on both rim (triangular) sublattices with the SAME chirality breaks time reversal and endows the central (formerly flat) band with Chern number C = +1; at lambda=0.2 the middle band is gapped and verified to carry C=+1. This directly exhibits the flatness/topology trade-off: opposite-chirality rim flux instead preserves an exactly flat band but with C=0 (verified), whereas same-chirality flux trades exact flatness for nontrivial topology, consistent with the local-hopping no-go theorem (arXiv:1311.4956). One-third filling places the chemical potential in the topological band, giving a quantum anomalous Hall flat-ish band whose Chern sign is set by the chirality of lambda. Physical rationale: the dice geometry is the 2D limit of the (111) perovskite trilayer and of Josephson-junction/photonic 'Aharonov-Bohm cage' arrays; co-rotating loop currents are induced by a perpendicular field or Floquet drive. Candidate realizations: (111) SrTiO3/SrIrO3-type oxide trilayers, three-beam optical lattices producing the T3 geometry, and superconducting/photonic dice networks. Relevant arXiv: 1311.4956 (exact-flat vs nontrivial-Chern no-go, which this model concretely illustrates), 2501.11783 (strain-tunable topological transitions in flat-band lattice families), 1304.1323 (interacting flat-band/fractional Chern physics).",
+          "novelty_review": "MEDIUM",
+          "feasibility_review": "MEDIUM",
+          "elo_score": 1153.4754312943044,
+          "review_comments": [
+            "The hypothesis presents a well-motivated tight-binding model for dice lattice with co-rotating imaginary NNN hopping that concretely illustrates the flatness-topology tradeoff from the no-go theorem (1311.4956). However, topological phases on the dice lattice are well-established (Wang & Ran 1109.3435 via interactions; Cheng & Gao 2202.01029 via Floquet driving). The novelty lies in the specific NNN-flux mechanism to achieve C=+1 with controlled flatness-topology transition, rather than in the phenomenon itself. Feasibility is sound: all material platforms exist, synthetic-flux methods are proven, and Chern-number calculation is straightforward. The main experimental challenge is precise engineering of co-rotating chirality and maintaining exact flatness while breaking TR symmetry. The hypothesis correctly invokes 1311.4956: the model satisfies the theorem by sacrificing exact flatness at finite \u03bb to gain topology\u2014this is consistent, not evasive."
+          ],
+          "references": [
+            "arXiv:1311.4956 (Chen et al., impossibility theorem\u2014core motivation)",
+            "arXiv:1109.3435 (Wang & Ran, dice-lattice flat bands with C=2 via interactions)",
+            "arXiv:2501.11783 (Sharma & Banerjee, strain-tunable topological transitions)",
+            "arXiv:1304.1323 (Liu et al., fractional Chern insulators)",
+            "arXiv:2202.01029 (Cheng & Gao, Floquet dice-lattice with C=1 and C=2 phases)",
+            "arXiv:1804.10261 (M\u00f6ller & Cooper, synthetic flux on optical dice lattice)",
+            "arXiv:2206.04543 (Mosseri et al., Aharonov-Bohm cages and flat bands)"
+          ],
+          "is_active": true,
+          "parent_ids": [],
+          "spec": {
+            "kind": "tight_binding",
+            "dim_k": 2,
+            "lattice_vectors": [
+              [
+                1.5,
+                0.8660254
+              ],
+              [
+                1.5,
+                -0.8660254
+              ]
+            ],
+            "orbitals": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "onsite": [
+              0,
+              0,
+              0
+            ],
+            "hoppings": [
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 1,
+                "R": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": -1.0,
+                "i": 0,
+                "j": 2,
+                "R": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.2
+                ],
+                "i": 1,
+                "j": 1,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.2
+                ],
+                "i": 1,
+                "j": 1,
+                "R": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.2
+                ],
+                "i": 1,
+                "j": 1,
+                "R": [
+                  -1,
+                  1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.2
+                ],
+                "i": 2,
+                "j": 2,
+                "R": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.2
+                ],
+                "i": 2,
+                "j": 2,
+                "R": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "amp": [
+                  0,
+                  0.2
+                ],
+                "i": 2,
+                "j": 2,
+                "R": [
+                  -1,
+                  1
+                ]
+              }
+            ],
+            "claims": {
+              "chern_number": {
+                "band_index": 1,
+                "expected": 1
+              }
+            }
+          },
+          "verification": {
+            "kind": "tight_binding",
+            "checkable": true,
+            "claim_supported": true,
+            "evidence": {
+              "n_orb": 3,
+              "dim_k": 2,
+              "kmesh": 24,
+              "bandwidths": [
+                4.354784,
+                2.078461,
+                4.354784
+              ],
+              "chern_number": {
+                "band_index": 1,
+                "chern": 1,
+                "chern_raw": 1.0,
+                "expected": 1
+              }
+            },
+            "reason": "Chern(band 1)=1 == expected 1",
+            "error": null
+          }
+        }
+      ]
+    }
+  ],
+  "hypotheses_ranked": [
+    {
+      "id": "G4672",
+      "title": "Chiral-flux kagome lattice: a nearly flat Chern = \u22121 band at 5/6 filling realizable in kagome metals and optical lattices",
+      "text": "Hypothesis: The standard 3-site nearest-neighbor (NN) kagome model has an exactly flat band that quadratically touches a dispersive band at Gamma. Adding a time-reversal-breaking imaginary next-nearest-neighbor (NNN) hopping i*lambda (a Haldane-like staggered flux on the kagome NNN bonds) gaps this touching and turns the formerly flat band into an isolated, *nearly* flat band carrying Chern number C = \u22121. With t=1 (NN) and lambda=0.3 the top band has bandwidth ~0.43 (numerically verified) and C=\u22121 (verified via Fukui-Hatsugai-Suzuki), so that filling 5/6 (the topmost band fully occupied) realizes a quantum anomalous Hall flat band; the Chern sign is tunable by the sign of lambda, and the residual bandwidth shrinks as lambda decreases (with a correspondingly smaller gap, as required by the no-go theorem of arXiv:1311.4956). Physical rationale: kagome NNN imaginary hopping is the canonical orbital-current/spin-orbit term, generated physically by an out-of-plane Zeeman/exchange field or by circularly polarized light (Floquet). Candidate realizations: kagome metals (Fe3Sn2, Co3Sn2S2, CoSn, FeSn) where flat bands are already observed, and ultracold-atom kagome optical lattices with synthetic gauge fields. Relevant arXiv: 2510.09150 (Chern insulators and topological flat bands in cavity-embedded kagome systems, showing a nearly flat band can be made topological), 1304.1323 (fractional Chern insulators on the kagome flat band), 1311.4956 (impossibility of exactly flat nontrivial Chern bands with strictly local hopping), 0905.4826 (kagome flat bands).",
+      "novelty_review": "MEDIUM",
+      "feasibility_review": "HIGH",
+      "elo_score": 1228.3388961187247,
+      "review_comments": [
+        "The hypothesis correctly applies the well-established Haldane-model staggered-flux paradigm to kagome lattices with NNN imaginary hopping. All cited references are verified and correctly contextualized. The no-go theorem (1311.4956) is appropriately invoked: the proposed nearly-flat topological band respects the constraint that exactly-flat + topological + local hopping is impossible by maintaining residual bandwidth. Novelty is moderate because (1) adding imaginary NNN to kagome to create topological bands is explored in recent work (Wang et al. 2410.07000, 2024), which explicitly shows Chern numbers \u00b11 to \u00b14 in similar parameter regimes; (2) NNN-driven topological transitions in kagome predate the hypothesis (Beugeling et al. 1207.6545, 2012). However, the specific targeting of filling 5/6 with C = -1 at t=1, \u03bb=0.3 with claimed bandwidth ~0.43 appears to be a concrete design not explicitly covered in these prior works. Feasibility is high: the model is analytically specified (\u22644 sites/cell, NN + NNN hopping), numerically verifiable via exact diagonalization and Fukui-Hatsugai-Suzuki Chern calculation, and realizable in experimentally established platforms (kagome metals CoSn, Fe3Sn2, etc.; optical lattices with synthetic gauge fields). The physical mechanism (TR-breaking orbit currents from Zeeman/Floquet) is plausible. Main gaps: hypothesis does not cite or distinguish itself from 2410.07000, which may independently cover this parameter regime; filling semantics (5/6 of band vs. total filling) could be clearer."
+      ],
+      "references": [
+        "2510.09150 (Goto et al., Oct 2025 \u2013 Chern insulators and topological flat bands in cavity-embedded kagome)",
+        "1304.1323 (Liu et al., 2013 \u2013 Fractional Chern insulators on kagome/ruby flat bands)",
+        "1311.4956 (Chen et al., 2013 \u2013 No-go theorem: exactly flat nontrivial Chern bands impossible with strictly local hopping)",
+        "0905.4826 (Endo et al., 2009 \u2013 Kagome flat bands in tight-binding models)",
+        "2410.07000 (Wang et al., 2024 \u2013 Kagome with NNN hopping creating topological bands C=\u00b11 to \u00b14)",
+        "1207.6545 (Beugeling et al., 2012 \u2013 Topological phase transitions via NNN hopping in kagome and Lieb lattices)",
+        "2002.01452 (Kang et al., 2020 \u2013 Experimental observation of topological flat bands in CoSn kagome metal)"
+      ],
+      "is_active": true,
+      "parent_ids": [],
+      "spec": {
+        "kind": "tight_binding",
+        "dim_k": 2,
+        "lattice_vectors": [
+          [
+            1,
+            0
+          ],
+          [
+            0.5,
+            0.8660254
+          ]
+        ],
+        "orbitals": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            0
+          ],
+          [
+            0.25,
+            0.4330127
+          ]
+        ],
+        "onsite": [
+          0,
+          0,
+          0
+        ],
+        "hoppings": [
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              0,
+              -1
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 1,
+            "j": 2,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 1,
+            "j": 2,
+            "R": [
+              1,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.3
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.3
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.3
+            ],
+            "i": 0,
+            "j": 2,
+            "R": [
+              -1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.3
+            ],
+            "i": 0,
+            "j": 2,
+            "R": [
+              1,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.3
+            ],
+            "i": 1,
+            "j": 2,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.3
+            ],
+            "i": 1,
+            "j": 2,
+            "R": [
+              0,
+              -1
+            ]
+          }
+        ],
+        "claims": {
+          "chern_number": {
+            "band_index": 2,
+            "expected": -1
+          }
+        }
+      },
+      "verification": {
+        "kind": "tight_binding",
+        "checkable": true,
+        "claim_supported": true,
+        "evidence": {
+          "n_orb": 3,
+          "dim_k": 2,
+          "kmesh": 24,
+          "bandwidths": [
+            2.693019,
+            2.633475,
+            0.429026
+          ],
+          "chern_number": {
+            "band_index": 2,
+            "chern": -1,
+            "chern_raw": -1.0,
+            "expected": -1
+          }
+        },
+        "reason": "Chern(band 2)=-1 == expected -1",
+        "error": null
+      }
+    },
+    {
+      "id": "E3726",
+      "title": "Chiral kagome model with imaginary NNN hopping: an isolated, tunable Chern = \u22121 nearly-flat lowest band at 1/3 filling for kagome ferromagnets and flux optical lattices",
+      "text": "Synthesis & motivation. Both parents seek an isolated, near-flat Chern band from a minimal time-reversal-breaking term added to a frustrated lattice whose NN limit already has an exactly flat band. The kagome route (Parent 1) wins on material realism (it maps directly onto spin-polarized kagome ferromagnets), while the checkerboard route (Parent 2) contributes the key design lesson: the topological band should be the one you actually OCCUPY, separated by a hard gap, so it can host integer QAH and, under interactions, a fractional Chern insulator. We combine these and resolve Parent 1's filling error (a spinless 3-orbital kagome cell has fillings 1/3, 2/3, 1; the '5/6' figure was inconsistent). The correct, verified design puts the topological flat band at the BOTTOM of the spectrum so that 1/3 filling places the Fermi level in the gap ABOVE it \u2014 the canonical FCI host setting.\n\nModel. Spinless kagome lattice, 3 sites/cell at A=(0,0), B=(1/2,0), C=(1/4,\u221a3/4), with a1=(1,0), a2=(1/2,\u221a3/2). Real NN hopping t=+1 on all six NN bonds gives an exactly flat lowest band (verified bandwidth = 4e-15) that quadratically touches the middle band at \u0393. We add a purely imaginary chiral NNN hopping \u00b1i\u03bb on the six NNN bonds, with the sign fixed by the Haldane-like circulation rule nu_ij = sign[(r_S\u2212r_i)\u00d7(r_j\u2212r_S)] through the shared NN site S: the A\u2013B and B\u2013C NNN bonds carry +i\u03bb-type signs and the A\u2013C bonds the opposite, all flipped together to select the Chern sign. This is the canonical orbital-current / intrinsic-spin-orbit term, physically generated by an out-of-plane exchange/Zeeman field in a kagome ferromagnet or by circularly polarized (Floquet) driving / laser-assisted tunneling in a kagome optical lattice.\n\nVerified results (Fukui-Hatsugai-Suzuki, 24x24 mesh, numpy verifier). At \u03bb=0.1 the touching at \u0393 is gapped: the lowest band becomes isolated with Chern number C=\u22121 (verified, sign tunable by flipping \u03bb), residual bandwidth W\u22480.346, and a direct gap \u0394\u22480.620 above it at 1/3 filling \u2014 a flatness ratio \u0394/W\u22481.8. Thus 1/3 filling (lowest band occupied) realizes a quantum anomalous Hall insulator. As \u03bb grows the band disperses (W\u22481.04 at \u03bb=0.3) and as \u03bb shrinks both W and \u0394 collapse together, exactly as required by the no-go theorem (arXiv:1311.4956) forbidding strictly flat local Chern bands; \u03bb\u22480.1 is a sweet spot. \n\nFalsifiable predictions / next checks. (i) The flat band carries C=\u22121 and the band immediately above carries C=+? with total = 0 (sum rule) \u2014 checkable. (ii) Adding a small real NNN term t2 (\u22480.1) should further flatten the lowest band toward W/\u0394<1/10 without closing the gap, pushing into the FCI regime where \u03bd=1/3 filling of the flat band hosts a 3-fold-degenerate fractional Chern insulator (cf. arXiv:1304.1323). (iii) Candidate realizations: spin-polarized kagome ferromagnets Fe3Sn2, Co3Sn2S2, FeSn/CoSn (flat bands already seen by ARPES; orbital-current/SOC supplies i\u03bb), monolayer kagome QAH candidates Co3Pb3S2/Co3Sn3Se2 (arXiv:2010.07670), and kagome optical lattices with synthetic flux. Supporting literature confirming the i\u03bb-on-kagome-NNN mechanism produces C=\u00b11...\u00b14 bands: arXiv:2410.07000, 1207.6545.",
+      "novelty_review": "MEDIUM",
+      "feasibility_review": "HIGH",
+      "elo_score": 1218.127174207909,
+      "review_comments": [
+        "The hypothesis presents a well-motivated design combining three known elements: (i) spinless kagome NN-flat-band geometry, (ii) chiral imaginary NNN hopping to gap the band and generate Chern number C=\u00b11 (recently demonstrated in arXiv:2410.07000, Oct 2024), and (iii) tunable parameters to isolate the flat Chern band at the spectrum's bottom for 1/3 filling FCI. The novelty is incremental\u2014it optimizes a known mechanism (chiral kagome NNN terms \u2192 topological bands) for the specific goal of isolated-band FCI hosting. Strengths: (a) the design correctly applies understanding of the no-go theorem (1311.4956)\u2014adding a small imaginary term circumvents it by sacrificing exact flatness for topological isolation; (b) numerical verification is straightforward and the claimed \u0394/W\u22481.8 is reasonable; (c) material platforms (Fe3Sn2, Co3Sn2S2, Co3Pb3S2/Co3Sn3Se2) are well-established with confirmed flat bands and anomalous Hall physics. Concerns: (i) **arXiv:1207.6545 cannot be verified**\u2014this reference is cited as supporting literature but does not appear in arxiv searches, raising a red flag; (ii) the claim to 'resolve Parent 1's filling error' lacks detail on what the original error was; (iii) the prediction of FCI at \u03bd=1/3 via adding real NNN term t2 to achieve W/\u0394<1/10 is speculative and not numerically demonstrated here; (iv) the term '3-fold degenerate' FCI at \u03bd=1/3 is mentioned but not explained relative to the 3-site unit cell. The band-structure calculation (24\u00d724 Fukui-Hatsugai-Suzuki mesh, C=\u22121 verified) is sound methodology. The sum-rule check on Chern numbers across bands is standard. Overall: a competent, feasible proposal that increments recent work (2410.07000) toward a specific FCI goal, but with limited conceptual novelty and one unverified key reference."
+      ],
+      "references": [
+        "1311.4956 (Chen et al., 2013) - No-go theorem confirmed",
+        "1304.1323 (Liu, Kovrizhin, Bergholtz, 2013) - FCI on kagome at \u03bd=1/2, 1 confirmed",
+        "2010.07670 (Zhang et al., 2020) - Co\u2083Pb\u2083S\u2082, Co\u2083Sn\u2083Se\u2082 kagome QAH candidates confirmed",
+        "2410.07000 (Wang, Pullasseri, Santos, 2024) - Chiral NNN hopping on kagome producing C=\u00b11 to \u00b14 bands confirmed (most directly relevant prior art)",
+        "2510.09150 (Goto et al., 2025) - Chern insulators in cavity-embedded kagome systems",
+        "Material platforms: Fe\u2083Sn\u2082, Co\u2083Sn\u2082S\u2082 (multiple ARPES + transport papers 2008.02202, 2020-05-13920, 2508.11140) and FeSn/CoSn (2311.09290) confirmed as kagome ferromagnets",
+        "**1207.6545 NOT VERIFIED - reference cannot be located; missing citation requires clarification**"
+      ],
+      "is_active": true,
+      "parent_ids": [
+        "G4672",
+        "G3307"
+      ],
+      "spec": {
+        "kind": "tight_binding",
+        "dim_k": 2,
+        "lattice_vectors": [
+          [
+            1,
+            0
+          ],
+          [
+            0.5,
+            0.8660254
+          ]
+        ],
+        "orbitals": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            0
+          ],
+          [
+            0.25,
+            0.4330127
+          ]
+        ],
+        "onsite": [
+          0,
+          0,
+          0
+        ],
+        "hoppings": [
+          {
+            "amp": 1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": 1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              0
+            ]
+          },
+          {
+            "amp": 1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": 1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              0,
+              -1
+            ]
+          },
+          {
+            "amp": 1.0,
+            "i": 1,
+            "j": 2,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": 1.0,
+            "i": 1,
+            "j": 2,
+            "R": [
+              1,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              -0.1
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              -0.1
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.1
+            ],
+            "i": 0,
+            "j": 2,
+            "R": [
+              -1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.1
+            ],
+            "i": 0,
+            "j": 2,
+            "R": [
+              1,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              -0.1
+            ],
+            "i": 1,
+            "j": 2,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0,
+              -0.1
+            ],
+            "i": 1,
+            "j": 2,
+            "R": [
+              0,
+              -1
+            ]
+          }
+        ],
+        "claims": {
+          "flat_band": {
+            "band_index": 0,
+            "max_bandwidth": 0.4
+          },
+          "gapped_at_filling": {
+            "filling": 0.3333333,
+            "min_gap": 0.05
+          },
+          "chern_number": {
+            "band_index": 0,
+            "expected": -1
+          }
+        }
+      },
+      "verification": {
+        "kind": "tight_binding",
+        "checkable": true,
+        "claim_supported": true,
+        "evidence": {
+          "n_orb": 3,
+          "dim_k": 2,
+          "kmesh": 24,
+          "bandwidths": [
+            0.34641,
+            2.30718,
+            2.65359
+          ],
+          "flat_band": {
+            "band_index": 0,
+            "bandwidth": 0.34641,
+            "max_bandwidth": 0.4
+          },
+          "gapped_at_filling": {
+            "filling": 0.3333333,
+            "n_filled": 1,
+            "direct_gap": 0.61977,
+            "min_gap": 0.05
+          },
+          "chern_number": {
+            "band_index": 0,
+            "chern": -1,
+            "chern_raw": -1.0,
+            "expected": -1
+          }
+        },
+        "reason": "band 0 bandwidth=0.3464 <= 0.4; direct gap at filling 0.3333333=0.6198 >= 0.05; Chern(band 0)=-1 == expected -1",
+        "error": null
+      }
+    },
+    {
+      "id": "G3307",
+      "title": "Checkerboard lattice with pi/4 NN flux and crossed anisotropic NNN: a topological Chern = \u22121 band at half filling for cold atoms",
+      "text": "Hypothesis: A 2-site/cell checkerboard (planar-pyrochlore) lattice with complex NN hopping carrying a staggered pi/4 phase around each crossed plaquette, plus the characteristic checkerboard-anisotropic real NNN hopping (+t' along x for sublattice A and along y for sublattice B, \u2212t' along the perpendicular directions), opens a full gap and produces a low-energy band with Chern number C = \u22121. With NN |t|=1, phi=pi/4 and t'=0.5 the lower band has bandwidth ~0.83 (verified) and C=\u22121 (verified). Half filling (one of two bands occupied) then realizes a quantum anomalous Hall state; reducing t' flattens the band toward the Sun-Gu-Katsura-Das Sarma 'nearly flat band' regime where flatness ratios of order 1:20 are reachable, and the band can host a fractional Chern insulator under interactions. Physical rationale: the crossed checkerboard geometry naturally yields perpendicular NNN paths for the two sublattices, while the pi/4 NN flux is the minimal time-reversal-breaking term; both are directly engineerable with laser-assisted tunneling/lattice shaking in optical lattices. Candidate realizations: ultracold fermions in a checkerboard optical lattice with synthetic flux; bilayer/oxide checkerboard networks. Relevant arXiv: 2512.16459 (checkerboard-lattice C=1 bands combined into higher-Chern flat bands and fractional Chern insulators in optical lattices), 1502.07350 (Chern insulators from shaken/driven optical lattices), 1311.4956 (flat-vs-topological no-go theorem).",
+      "novelty_review": "MEDIUM",
+      "feasibility_review": "MEDIUM",
+      "elo_score": 1200.0584983790618,
+      "review_comments": [
+        "The hypothesis assembles well-known ingredients (checkerboard lattices, synthetic flux, anisotropic NN/NNN hopping) into a specific configuration. While each component is established, the precise combination\u2014particularly the sublattice-selective anisotropic NNN pattern claimed to yield flatness ratios ~1:20\u2014lacks explicit precedent in arXiv literature. The model is numerically checkable and avoids Chen et al.'s no-go theorem correctly (by targeting nearly-flat, not exactly-flat bands). However, three issues reduce confidence: (1) The anisotropic NNN hopping implementation in optical lattices is underspecified\u2014achieving directionally different tunneling for different sublattices typically requires complex pulse sequences not detailed here. (2) The claimed flatness ratios are at the aggressive end for local-hopping models and would benefit from explicit numerical demonstration. (3) The 'planar-pyrochlore' framing is non-standard terminology (pyrochlore refers to 3D lattices); this may obscure rather than clarify the geometry. The hypothesis is plausible and testable but represents an incremental variation on checkerboard Chern-insulator theory rather than a breakthrough."
+      ],
+      "references": [
+        "2512.16459 (Ding et al. 2025): Fractional Chern insulator with higher Chern number in optical lattice\u2014bilayer checkerboard C=1\u2192C=2 engineering",
+        "1502.07350 (Verdeny & Mintert 2015): Tunable Chern insulator with shaken optical lattices\u2014synthetic flux feasibility",
+        "1311.4956 (Chen et al. 2013): No-go theorem on exactly-flat topological bands with local hopping",
+        "1508.04399 (Jaworowski et al. 2015): FCI at checkerboard\u2013Lieb transition with complex hopping phases",
+        "2501.11783 (Sharma & Banerjee 2025): Checkerboard split-graph and strain-tunable topological phase diagrams",
+        "1308.0343 (Bergholtz & Liu 2013): Review\u2014Topological flat band models and fractional Chern insulators"
+      ],
+      "is_active": true,
+      "parent_ids": [],
+      "spec": {
+        "kind": "tight_binding",
+        "dim_k": 2,
+        "lattice_vectors": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "orbitals": [
+          [
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5
+          ]
+        ],
+        "onsite": [
+          0,
+          0
+        ],
+        "hoppings": [
+          {
+            "amp": [
+              0.70710678,
+              0.70710678
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0.70710678,
+              0.70710678
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "amp": [
+              0.70710678,
+              -0.70710678
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0.70710678,
+              -0.70710678
+            ],
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              -1
+            ]
+          },
+          {
+            "amp": 0.5,
+            "i": 0,
+            "j": 0,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": -0.5,
+            "i": 1,
+            "j": 1,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": -0.5,
+            "i": 0,
+            "j": 0,
+            "R": [
+              0,
+              1
+            ]
+          },
+          {
+            "amp": 0.5,
+            "i": 1,
+            "j": 1,
+            "R": [
+              0,
+              1
+            ]
+          }
+        ],
+        "claims": {
+          "chern_number": {
+            "band_index": 0,
+            "expected": -1
+          }
+        }
+      },
+      "verification": {
+        "kind": "tight_binding",
+        "checkable": true,
+        "claim_supported": true,
+        "evidence": {
+          "n_orb": 2,
+          "dim_k": 2,
+          "kmesh": 24,
+          "bandwidths": [
+            0.828427,
+            0.828427
+          ],
+          "chern_number": {
+            "band_index": 0,
+            "chern": -1,
+            "chern_raw": -1.0,
+            "expected": -1
+          }
+        },
+        "reason": "Chern(band 0)=-1 == expected -1",
+        "error": null
+      }
+    },
+    {
+      "id": "G7080",
+      "title": "Dice (T3) lattice with co-rotating NNN flux: converting the macroscopically flat band into a Chern = +1 band at 1/3 filling",
+      "text": "Hypothesis: The 3-site dice/T3 lattice (a 6-coordinated hub plus two 3-coordinated rim sublattices) hosts an exactly flat band at E=0 from destructive Aharonov-Bohm interference. Adding *co-rotating* imaginary NNN hopping i*lambda on both rim (triangular) sublattices with the SAME chirality breaks time reversal and endows the central (formerly flat) band with Chern number C = +1; at lambda=0.2 the middle band is gapped and verified to carry C=+1. This directly exhibits the flatness/topology trade-off: opposite-chirality rim flux instead preserves an exactly flat band but with C=0 (verified), whereas same-chirality flux trades exact flatness for nontrivial topology, consistent with the local-hopping no-go theorem (arXiv:1311.4956). One-third filling places the chemical potential in the topological band, giving a quantum anomalous Hall flat-ish band whose Chern sign is set by the chirality of lambda. Physical rationale: the dice geometry is the 2D limit of the (111) perovskite trilayer and of Josephson-junction/photonic 'Aharonov-Bohm cage' arrays; co-rotating loop currents are induced by a perpendicular field or Floquet drive. Candidate realizations: (111) SrTiO3/SrIrO3-type oxide trilayers, three-beam optical lattices producing the T3 geometry, and superconducting/photonic dice networks. Relevant arXiv: 1311.4956 (exact-flat vs nontrivial-Chern no-go, which this model concretely illustrates), 2501.11783 (strain-tunable topological transitions in flat-band lattice families), 1304.1323 (interacting flat-band/fractional Chern physics).",
+      "novelty_review": "MEDIUM",
+      "feasibility_review": "MEDIUM",
+      "elo_score": 1153.4754312943044,
+      "review_comments": [
+        "The hypothesis presents a well-motivated tight-binding model for dice lattice with co-rotating imaginary NNN hopping that concretely illustrates the flatness-topology tradeoff from the no-go theorem (1311.4956). However, topological phases on the dice lattice are well-established (Wang & Ran 1109.3435 via interactions; Cheng & Gao 2202.01029 via Floquet driving). The novelty lies in the specific NNN-flux mechanism to achieve C=+1 with controlled flatness-topology transition, rather than in the phenomenon itself. Feasibility is sound: all material platforms exist, synthetic-flux methods are proven, and Chern-number calculation is straightforward. The main experimental challenge is precise engineering of co-rotating chirality and maintaining exact flatness while breaking TR symmetry. The hypothesis correctly invokes 1311.4956: the model satisfies the theorem by sacrificing exact flatness at finite \u03bb to gain topology\u2014this is consistent, not evasive."
+      ],
+      "references": [
+        "arXiv:1311.4956 (Chen et al., impossibility theorem\u2014core motivation)",
+        "arXiv:1109.3435 (Wang & Ran, dice-lattice flat bands with C=2 via interactions)",
+        "arXiv:2501.11783 (Sharma & Banerjee, strain-tunable topological transitions)",
+        "arXiv:1304.1323 (Liu et al., fractional Chern insulators)",
+        "arXiv:2202.01029 (Cheng & Gao, Floquet dice-lattice with C=1 and C=2 phases)",
+        "arXiv:1804.10261 (M\u00f6ller & Cooper, synthetic flux on optical dice lattice)",
+        "arXiv:2206.04543 (Mosseri et al., Aharonov-Bohm cages and flat bands)"
+      ],
+      "is_active": true,
+      "parent_ids": [],
+      "spec": {
+        "kind": "tight_binding",
+        "dim_k": 2,
+        "lattice_vectors": [
+          [
+            1.5,
+            0.8660254
+          ],
+          [
+            1.5,
+            -0.8660254
+          ]
+        ],
+        "orbitals": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        "onsite": [
+          0,
+          0,
+          0
+        ],
+        "hoppings": [
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              -1,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 1,
+            "R": [
+              0,
+              -1
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              0,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": -1.0,
+            "i": 0,
+            "j": 2,
+            "R": [
+              0,
+              1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.2
+            ],
+            "i": 1,
+            "j": 1,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.2
+            ],
+            "i": 1,
+            "j": 1,
+            "R": [
+              0,
+              1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.2
+            ],
+            "i": 1,
+            "j": 1,
+            "R": [
+              -1,
+              1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.2
+            ],
+            "i": 2,
+            "j": 2,
+            "R": [
+              1,
+              0
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.2
+            ],
+            "i": 2,
+            "j": 2,
+            "R": [
+              0,
+              1
+            ]
+          },
+          {
+            "amp": [
+              0,
+              0.2
+            ],
+            "i": 2,
+            "j": 2,
+            "R": [
+              -1,
+              1
+            ]
+          }
+        ],
+        "claims": {
+          "chern_number": {
+            "band_index": 1,
+            "expected": 1
+          }
+        }
+      },
+      "verification": {
+        "kind": "tight_binding",
+        "checkable": true,
+        "claim_supported": true,
+        "evidence": {
+          "n_orb": 3,
+          "dim_k": 2,
+          "kmesh": 24,
+          "bandwidths": [
+            4.354784,
+            2.078461,
+            4.354784
+          ],
+          "chern_number": {
+            "band_index": 1,
+            "chern": 1,
+            "chern_raw": 1.0,
+            "expected": 1
+          }
+        },
+        "reason": "Chern(band 1)=1 == expected 1",
+        "error": null
+      }
+    }
+  ],
+  "tournament_results": [
+    {
+      "iteration": 0,
+      "winner": "G4672",
+      "loser": "G7080",
+      "winner_score_after": 1216.0,
+      "loser_score_after": 1184.0
+    },
+    {
+      "iteration": 0,
+      "winner": "G3307",
+      "loser": "G7080",
+      "winner_score_after": 1215.263693206478,
+      "loser_score_after": 1168.736306793522
+    },
+    {
+      "iteration": 0,
+      "winner": "G4672",
+      "loser": "G3307",
+      "winner_score_after": 1231.9660918698307,
+      "loser_score_after": 1199.2976013366472
+    },
+    {
+      "iteration": 0,
+      "winner": "G4672",
+      "loser": "G3307",
+      "winner_score_after": 1246.4660703266338,
+      "loser_score_after": 1184.797622879844
+    },
+    {
+      "iteration": 0,
+      "winner": "G3307",
+      "loser": "G7080",
+      "winner_score_after": 1200.0584983790618,
+      "loser_score_after": 1153.4754312943044
+    },
+    {
+      "iteration": 0,
+      "winner": "E3726",
+      "loser": "G4672",
+      "winner_score_after": 1218.127174207909,
+      "loser_score_after": 1228.3388961187247
+    }
+  ],
+  "final_overview": {
+    "summary": "All four proposed tight-binding models were numerically verified to host topologically nontrivial bands (|Chern|=1), confirming that both kagome-family and checkerboard lattices with engineered flux or complex hopping are robust routes to topological flat bands in \u22644-site unit cells. A clear pattern emerges: the three highest-ranked models are kagome or kagome-derived (3-site cell), benefiting from kagome's intrinsic destructive-interference flat-band mechanism, while the checkerboard model (2-site) achieves topology at the cost of moderate bandwidth. The imaginary-NNN kagome model (#1218) stands out as the strongest single candidate: it combines the flattest band (W\u22480.346t), a well-isolated direct gap (0.62t) at the experimentally natural 1/3 filling, and a clean Chern=-1 invariant, making it the most promising for observing fractional Chern insulator (FCI) physics. The chiral-flux kagome (#1228) is the second-strongest direction but targets 5/6 filling, which is harder to achieve and maintain in experiment. The dice-lattice model (#1153) is verified but its middle-band bandwidth (~2.1t) is large, reducing its practical FCI potential without further parameter tuning.",
+    "critique": [
+      "All four models show only MEDIUM novelty: they apply established flux-threading or complex-hopping techniques to well-known lattice geometries. A genuinely new lattice motif or hopping topology would strengthen the research program.",
+      "The checkerboard model (#1200) has equal bandwidths in both bands (W=0.828t each), meaning neither band is particularly flat; it is topological but unlikely to support strongly correlated FCI states without significant reduction of the bandwidth-to-gap ratio.",
+      "The dice-lattice model (#1153) ranks last because the targeted Chern band (band index 1) has bandwidth W\u22482.08t\u2014much larger than the other models\u2014and the original macroscopic flatness of the dice lattice is largely destroyed by the NNN flux, undermining the initial motivation.",
+      "Chern numbers were computed on a coarse 24\u00d724 k-mesh; for the checkerboard and chiral-flux kagome models, a finer mesh (\u226548\u00d748) is needed to rule out spurious half-integer contributions near band touchings.",
+      "None of the models have been assessed for Berry curvature uniformity, which is a necessary (not just sufficient) condition for FCI stability. A flat Chern band with highly non-uniform Berry curvature can fail to host FCI states even at moderate interaction strengths.",
+      "Experimental feasibility for all models relies on achieving synthetic gauge fields (complex or flux-threaded hopping); the specific material hosts cited (kagome metals, optical lattices) are plausible but no concrete parameter mapping to real Hamiltonians has been performed.",
+      "The 5/6-filling target of model #1228 requires precise control of chemical potential in a narrow nearly-flat band, which is experimentally very challenging in solid-state kagome metals where disorder broadening typically exceeds the 0.43t bandwidth."
+    ],
+    "suggested_next_steps": [
+      "Prioritize experimental pursuit of model #1218 (imaginary-NNN kagome) by mapping its hopping parameters onto spin-orbit-coupled kagome metals (e.g., CoSn, FeSn monolayers) or Floquet-driven optical kagome lattices; compute the Hubbard-U phase diagram to locate the FCI window.",
+      "Compute Berry curvature distributions k(k) for all four models and quantify their variance; rank models by Berry curvature flatness as a secondary criterion alongside bandwidth and gap.",
+      "Refine Chern number calculations for models #1200 and #1228 using a \u226548\u00d748 k-mesh and cross-validate with the Fukui\u2013Hatsugai\u2013Suzuki algorithm to eliminate coarse-mesh artifacts.",
+      "Perform exact diagonalization (ED) at small system sizes (18\u201324 sites) for model #1218 at 1/3 filling with nearest-neighbor Hubbard repulsion to directly search for FCI ground states and compute the many-body spectral flow under flux insertion.",
+      "For model #1228 (5/6 filling), explore whether particle-hole transformation maps it to a 1/6-filling problem that is more accessible experimentally, and check if adding a staggered on-site potential can open a larger gap without destroying the Chern band.",
+      "Systematically scan the parameter space of model #1218 (ratio t'/t of NNN to NN hopping) to find the bandwidth minimum and gap maximum simultaneously, generating a phase diagram that guides experimental targeting.",
+      "Investigate whether the dice-lattice model (#1153) can be improved by adding a symmetry-breaking staggered potential on the hub site to reduce the Chern-band bandwidth below 0.5t, potentially rescuing it as an FCI candidate.",
+      "Assess disorder robustness of the flat Chern band in model #1218 by adding on-site Anderson disorder and tracking the Chern number and spectral gap as a function of disorder strength, relevant to realistic material implementations.",
+      "Explore 4-site unit cell extensions (e.g., decorated kagome or breathing kagome with NNN flux) that might yield even flatter Chern bands or higher Chern numbers (|C|=2), building on the successful kagome motif identified here."
+    ]
+  }
+}
