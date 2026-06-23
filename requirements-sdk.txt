@@ -1,0 +1,9 @@
+# Dependencies for the Claude Agent SDK workflow (app/sdk). This path is intentionally
+# lightweight: it does NOT need openai, gradio, torch, or sentence-transformers (those
+# are for the OpenAI/vLLM Gradio loop in requirements.txt).
+claude-agent-sdk      # Claude Agent SDK: query(), ClaudeAgentOptions, @tool, create_sdk_mcp_server
+arxiv                 # arXiv literature tool (app/tools/arxiv_search.py)
+python-dateutil       # date handling used by the arXiv tool
+PyYAML                # config.yaml loading (app/config.py)
+pydantic              # data models (app/models.py)
+numpy                 # tight-binding verifier (app/verification/condensed_matter)

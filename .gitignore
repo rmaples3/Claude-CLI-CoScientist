@@ -1,0 +1,17 @@
+.venv
+venv
+__pycache__
+*.pyc
+results/app_log_*.txt
+results
+
+# --- secrets / personal (never commit; each user authenticates locally) ---
+.env
+.env.*
+.claude/settings.local.json
+*.credentials.json
+
+# --- run artifacts / caches ---
+*.checkpoint.json
+.pytest_cache/
+.DS_Store
