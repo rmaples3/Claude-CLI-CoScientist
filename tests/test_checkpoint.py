@@ -150,3 +150,63 @@ def test_resume_preserves_prior_hypotheses(monkeypatch, tmp_path):
     ids = {h["id"] for h in out["hypotheses_ranked"]}
     assert {"G1", "G2"}.issubset(ids)                # prior hypotheses retained
     assert len(out["hypotheses_ranked"]) >= 4        # 2 prior + 2 new + 1 evolved
+
+
+def test_resume_continues_partial_reflection_without_regeneration(monkeypatch, tmp_path):
+    """A reflection-stage checkpoint resumes the unfinished item, not Generation."""
+    calls = {"generate": 0, "reflected": []}
+
+    async def _must_not_generate(**kwargs):
+        calls["generate"] += 1
+        raise AssertionError("resume incorrectly restarted Generation")
+
+    async def _record_reflect(*, hypothesis_text, goal, model):
+        calls["reflected"].append(hypothesis_text)
+        return {"novelty_review": "HIGH", "feasibility_review": "MEDIUM",
+                "comment": "ok", "references": []}
+
+    async def _ok_meta(*, goal, ranked, model):
+        return {"summary": "resumed", "critique": [], "suggested_next_steps": []}
+
+    monkeypatch.setattr(roles, "generate", _must_not_generate)
+    monkeypatch.setattr(roles, "reflect", _record_reflect)
+    monkeypatch.setattr(roles, "meta_review", _ok_meta)
+
+    ckpt = str(tmp_path / "partial-reflection.json")
+    seed = ContextMemory()
+    reviewed = _make_hypo("G1")
+    reviewed.novelty_review = "HIGH"
+    reviewed.feasibility_review = "MEDIUM"
+    pending = _make_hypo("G2")
+    pending.novelty_review = None
+    pending.feasibility_review = None
+    seed.add_hypothesis(reviewed)
+    seed.add_hypothesis(pending)
+    save_checkpoint(
+        ckpt,
+        seed,
+        meta={
+            "goal": "g",
+            "stage": "reflection",
+            "error": "RuntimeError: usage limit reached",
+            "workflow_state": {
+                "version": 1,
+                "iteration": 1,
+                "phase": "reflection_new",
+                "new_ids": ["G1", "G2"],
+                "reflection_index": 1,
+            },
+        },
+    )
+
+    args = runmod._parse_args([
+        "--cycles", "1", "--num-hypotheses", "2", "--top-k", "1",
+        "--max-debate-pairs", "0", "--resume", ckpt,
+    ])
+    out = asyncio.run(runmod._run(args, ckpt))
+
+    assert out["completed"] is True
+    assert calls["generate"] == 0
+    assert calls["reflected"] == ["text G2"]
+    assert seed.iteration_number == 0  # the saved object itself is not mutated
+    assert {h["id"] for h in out["hypotheses_ranked"]} == {"G1", "G2"}

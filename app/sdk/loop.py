@@ -8,6 +8,7 @@ LLM is used only for the per-role reasoning steps.
 Every expensive step calls an optional checkpoint callback so a mid-run failure (e.g. a
 Claude usage-limit cutoff) loses at most the single in-flight call -- see app/sdk/checkpoint.py.
 """
+import copy
 import itertools
 import logging
 import random
@@ -57,6 +58,12 @@ class CoScientistWorkflow:
     def __init__(self, config: Optional[WorkflowConfig] = None, checkpoint_cb: Optional[CheckpointCB] = None):
         self.config = config or WorkflowConfig()
         self._checkpoint_cb = checkpoint_cb
+        self._cycle_state: Dict[str, Any] = {}
+
+    @property
+    def resume_state(self) -> Dict[str, Any]:
+        """Serializable position of the in-flight cycle for checkpoint metadata."""
+        return copy.deepcopy(self._cycle_state)
 
     # -- helpers -----------------------------------------------------------------------
     def _checkpoint(self, context: ContextMemory, stage: str) -> None:
@@ -78,39 +85,62 @@ class CoScientistWorkflow:
             h.hypothesis_id, h.verification.get("checkable"), h.verification.get("claim_supported"),
         )
 
+    async def _reflect_one(self, h: Hypothesis, goal: str, model: str) -> None:
+        try:
+            review = await roles.reflect(hypothesis_text=h.text, goal=goal, model=model)
+        except Exception as exc:
+            logger.warning("Reflection failed for %s: %s", h.hypothesis_id, exc)
+            raise
+        h.novelty_review = review["novelty_review"]
+        h.feasibility_review = review["feasibility_review"]
+        if review["comment"]:
+            h.review_comments.append(review["comment"])
+        if review["references"]:
+            h.references.extend(review["references"])
+        logger.info(
+            "Reviewed %s: novelty=%s feasibility=%s",
+            h.hypothesis_id, h.novelty_review, h.feasibility_review,
+        )
+
     async def _reflect_all(
         self, hypos: List[Hypothesis], goal: str, model: str, context: ContextMemory
     ) -> None:
+        """Non-resumable reflection helper retained for the smoke-test path."""
         for h in hypos:
-            try:
-                review = await roles.reflect(hypothesis_text=h.text, goal=goal, model=model)
-            except Exception as exc:
-                logger.warning("Reflection failed for %s: %s", h.hypothesis_id, exc)
-                raise  # propagate so a usage-limit cutoff stops the run (state already saved)
-            h.novelty_review = review["novelty_review"]
-            h.feasibility_review = review["feasibility_review"]
-            if review["comment"]:
-                h.review_comments.append(review["comment"])
-            if review["references"]:
-                h.references.extend(review["references"])
-            logger.info(
-                "Reviewed %s: novelty=%s feasibility=%s",
-                h.hypothesis_id, h.novelty_review, h.feasibility_review,
-            )
-            self._checkpoint(context, "reflection")  # save after each review
+            await self._reflect_one(h, goal, model)
+            self._checkpoint(context, "reflection")
 
     async def _tournament(
-        self, active: List[Hypothesis], goal: str, model: str, context: ContextMemory
+        self, active: List[Hypothesis], goal: str, model: str, context: ContextMemory,
+        *, state: Optional[Dict[str, Any]] = None, phase_key: str = "ranking",
     ) -> None:
         cfg = self.config
         if len(active) < 2:
             logger.info("Not enough active hypotheses for a tournament (%d).", len(active))
             return
-        pairs = list(itertools.combinations(active, 2))
-        random.shuffle(pairs)
-        pairs = pairs[: cfg.max_debate_pairs]
-        logger.info("Running tournament: %d debate(s).", len(pairs))
-        for a, b in pairs:
+
+        pairs_key = f"{phase_key}_pairs"
+        index_key = f"{phase_key}_index"
+        if state is not None and pairs_key in state:
+            pair_ids = list(state[pairs_key])
+        else:
+            pairs = list(itertools.combinations(active, 2))
+            random.shuffle(pairs)
+            pairs = pairs[: cfg.max_debate_pairs]
+            pair_ids = [[a.hypothesis_id, b.hypothesis_id] for a, b in pairs]
+            if state is not None:
+                state[pairs_key] = pair_ids
+                state[index_key] = 0
+
+        start = int(state.get(index_key, 0)) if state is not None else 0
+        logger.info("Running tournament: %d remaining debate(s) of %d.",
+                    len(pair_ids) - start, len(pair_ids))
+        by_id = {h.hypothesis_id: h for h in active}
+        for idx in range(start, len(pair_ids)):
+            a_id, b_id = pair_ids[idx]
+            if a_id not in by_id or b_id not in by_id:
+                raise ValueError(f"checkpoint tournament pair references missing hypothesis: {a_id}, {b_id}")
+            a, b = by_id[a_id], by_id[b_id]
             try:
                 pick = await roles.debate(goal=goal, hypo_a=a.to_dict(), hypo_b=b.to_dict(), model=model)
                 winner = a if pick == "A" else b
@@ -128,74 +158,160 @@ class CoScientistWorkflow:
                 "winner_score_after": winner.elo_score,
                 "loser_score_after": loser.elo_score,
             })
-            self._checkpoint(context, "ranking")  # save after each match
+            if state is not None:
+                state[index_key] = idx + 1
+            self._checkpoint(context, phase_key)
 
     # -- entry points ------------------------------------------------------------------
-    async def run_cycle(self, goal: ResearchGoal, context: ContextMemory) -> Dict[str, Any]:
+    async def run_cycle(
+        self, goal: ResearchGoal, context: ContextMemory,
+        resume_state: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Run or resume one cycle from its last completed expensive operation.
+
+        The state contains stable hypothesis IDs, reflection indices, and the exact shuffled
+        tournament pair lists.  Persisting the pair lists is essential: recreating them on
+        resume would both repeat Elo updates and change the experiment.
+        """
         cfg, m = self.config, self.config.models
-        cycle: Dict[str, Any] = {"iteration": context.iteration_number + 1, "steps": {}}
-        logger.info("=== Cycle %d ===", cycle["iteration"])
+        resumable = isinstance(resume_state, dict) and resume_state.get("phase") not in (None, "complete")
+        if resumable:
+            state = copy.deepcopy(resume_state)
+            expected_iteration = context.iteration_number + 1
+            if int(state.get("iteration", expected_iteration)) != expected_iteration:
+                raise ValueError(
+                    "checkpoint workflow iteration does not match context: "
+                    f"state={state.get('iteration')} expected={expected_iteration}"
+                )
+            logger.info("=== Resuming cycle %d at phase %s ===",
+                        expected_iteration, state.get("phase"))
+        else:
+            state = {
+                "version": 1,
+                "iteration": context.iteration_number + 1,
+                "phase": "generation",
+                "new_ids": [],
+                "reflection_index": 0,
+            }
+            logger.info("=== Cycle %d ===", state["iteration"])
+        self._cycle_state = state
+        cycle: Dict[str, Any] = {"iteration": int(state["iteration"]), "steps": {}}
 
         # 1. Generation (+ deterministic verification of each new hypothesis)
-        existing_titles = [h.title for h in context.hypotheses.values()]
-        ideas = await roles.generate(
-            goal=goal.description, constraints=goal.constraints,
-            existing_titles=existing_titles, n=cfg.num_hypotheses, model=m.generation,
-        )
-        new_hypos: List[Hypothesis] = []
-        for idea in ideas:
-            hid = _new_id("G", set(context.hypotheses.keys()))
-            h = Hypothesis(hid, idea["title"], idea["text"])
-            h.spec = idea.get("spec")
-            self._verify(h)
-            context.add_hypothesis(h)
-            new_hypos.append(h)
-        cycle["steps"]["generation"] = [h.to_dict() for h in new_hypos]
-        logger.info("Generated %d hypotheses.", len(new_hypos))
-        self._checkpoint(context, "generation")
+        if state["phase"] == "generation":
+            existing_titles = [h.title for h in context.hypotheses.values()]
+            ideas = await roles.generate(
+                goal=goal.description, constraints=goal.constraints,
+                existing_titles=existing_titles, n=cfg.num_hypotheses, model=m.generation,
+            )
+            new_ids: List[str] = []
+            for idea in ideas:
+                hid = _new_id("G", set(context.hypotheses.keys()))
+                h = Hypothesis(hid, idea["title"], idea["text"])
+                h.spec = idea.get("spec")
+                self._verify(h)
+                context.add_hypothesis(h)
+                new_ids.append(hid)
+            state["new_ids"] = new_ids
+            state["reflection_index"] = 0
+            state["phase"] = "reflection_new"
+            logger.info("Generated %d hypotheses.", len(new_ids))
+            self._checkpoint(context, "generation")
 
-        # 2. Reflection
-        await self._reflect_all(new_hypos, goal.description, m.reflection, context)
+        new_ids = list(state.get("new_ids") or [])
+        try:
+            new_hypos = [context.hypotheses[hid] for hid in new_ids]
+        except KeyError as exc:
+            raise ValueError(f"checkpoint references missing generated hypothesis: {exc}") from exc
+
+        # 2. Reflection, resuming at the first unfinished generated hypothesis.
+        if state["phase"] == "reflection_new":
+            start = int(state.get("reflection_index", 0))
+            for idx in range(start, len(new_hypos)):
+                await self._reflect_one(new_hypos[idx], goal.description, m.reflection)
+                state["reflection_index"] = idx + 1
+                self._checkpoint(context, "reflection")
+            state["phase"] = "ranking_1"
+            self._checkpoint(context, "reflection_complete")
+
+        cycle["steps"]["generation"] = [h.to_dict() for h in new_hypos]
         cycle["steps"]["reflection"] = [h.to_dict() for h in new_hypos]
 
-        # 3. Ranking (tournament 1)
-        active = context.get_active_hypotheses()
-        await self._tournament(active, goal.description, m.ranking, context)
-
-        # 4. Evolution (synthesize the top parents, then reflect on the child)
-        ranked = sorted(context.get_active_hypotheses(), key=lambda x: x.elo_score, reverse=True)
-        parents = ranked[: cfg.top_k]
-        evolved: Optional[Hypothesis] = None
-        if len(parents) >= 2:
-            child = await roles.evolve(
-                goal=goal.description, parents=[p.to_dict() for p in parents], model=m.evolution
+        # 3. Ranking (tournament 1). Pair order and next index are checkpointed.
+        if state["phase"] == "ranking_1":
+            await self._tournament(
+                context.get_active_hypotheses(), goal.description, m.ranking, context,
+                state=state, phase_key="ranking_1",
             )
-            if child:
-                hid = _new_id("E", set(context.hypotheses.keys()))
-                evolved = Hypothesis(hid, child["title"], child["text"])
-                evolved.spec = child.get("spec")
-                evolved.parent_ids = [p.hypothesis_id for p in parents]
-                self._verify(evolved)
-                context.add_hypothesis(evolved)
-                self._checkpoint(context, "evolution")
-                await self._reflect_all([evolved], goal.description, m.reflection, context)
+            state["phase"] = "evolution"
+            self._checkpoint(context, "ranking_1_complete")
+
+        # 4. Evolution (synthesize the top parents, then reflect on the child).
+        if state["phase"] == "evolution":
+            if "parent_ids" not in state:
+                ranked = sorted(context.get_active_hypotheses(), key=lambda x: x.elo_score, reverse=True)
+                state["parent_ids"] = [h.hypothesis_id for h in ranked[: cfg.top_k]]
+            try:
+                parents = [context.hypotheses[hid] for hid in state["parent_ids"]]
+            except KeyError as exc:
+                raise ValueError(f"checkpoint references missing evolution parent: {exc}") from exc
+
+            evolved_id = state.get("evolved_id")
+            if len(parents) >= 2 and not evolved_id:
+                child = await roles.evolve(
+                    goal=goal.description, parents=[p.to_dict() for p in parents], model=m.evolution
+                )
+                if child:
+                    evolved_id = _new_id("E", set(context.hypotheses.keys()))
+                    evolved = Hypothesis(evolved_id, child["title"], child["text"])
+                    evolved.spec = child.get("spec")
+                    evolved.parent_ids = [p.hypothesis_id for p in parents]
+                    self._verify(evolved)
+                    context.add_hypothesis(evolved)
+                    state["evolved_id"] = evolved_id
+                    state["evolved_reflected"] = False
+            state["phase"] = "reflection_evolved" if evolved_id else "ranking_2"
+            self._checkpoint(context, "evolution")
+
+        if state["phase"] == "reflection_evolved":
+            evolved_id = state.get("evolved_id")
+            if not evolved_id or evolved_id not in context.hypotheses:
+                raise ValueError("checkpoint is missing its evolved hypothesis")
+            if not state.get("evolved_reflected", False):
+                await self._reflect_one(context.hypotheses[evolved_id], goal.description, m.reflection)
+                state["evolved_reflected"] = True
+            state["phase"] = "ranking_2"
+            self._checkpoint(context, "reflection_evolved")
+
+        evolved_id = state.get("evolved_id")
+        evolved = context.hypotheses.get(evolved_id) if evolved_id else None
         cycle["steps"]["evolution"] = [evolved.to_dict()] if evolved else []
 
-        # 5. Ranking (tournament 2, now including the evolved hypothesis)
-        active = context.get_active_hypotheses()
-        await self._tournament(active, goal.description, m.ranking, context)
+        # 5. Ranking (tournament 2), independently resumable from tournament 1.
+        if state["phase"] == "ranking_2":
+            await self._tournament(
+                context.get_active_hypotheses(), goal.description, m.ranking, context,
+                state=state, phase_key="ranking_2",
+            )
+            state["phase"] = "meta_review"
+            self._checkpoint(context, "ranking_2_complete")
 
         # 6. Meta-review
-        ranked = sorted(active, key=lambda x: x.elo_score, reverse=True)
-        overview = await roles.meta_review(
-            goal=goal.description, ranked=[h.to_dict() for h in ranked], model=m.meta_review
-        )
-        context.meta_review_feedback.append(overview)
+        if state["phase"] == "meta_review":
+            ranked = sorted(context.get_active_hypotheses(), key=lambda x: x.elo_score, reverse=True)
+            overview = await roles.meta_review(
+                goal=goal.description, ranked=[h.to_dict() for h in ranked], model=m.meta_review
+            )
+            context.meta_review_feedback.append(overview)
+            context.iteration_number += 1
+            state["phase"] = "complete"
+            self._checkpoint(context, "meta_review")
+        else:
+            ranked = sorted(context.get_active_hypotheses(), key=lambda x: x.elo_score, reverse=True)
+            overview = context.meta_review_feedback[-1] if context.meta_review_feedback else {}
+
         cycle["meta_review"] = overview
         cycle["ranked"] = [h.to_dict() for h in ranked]
-
-        context.iteration_number += 1
-        self._checkpoint(context, "meta_review")
         logger.info("=== Cycle %d complete ===", context.iteration_number)
         return cycle
 

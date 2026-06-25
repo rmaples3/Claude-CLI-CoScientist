@@ -7,7 +7,7 @@ so an interrupted write can't corrupt the checkpoint. No model calls, no network
 """
 import json
 import os
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple
 
 from ..models import ContextMemory, Hypothesis
 
@@ -55,8 +55,23 @@ def save_checkpoint(path: str, ctx: ContextMemory, meta: Optional[Dict[str, Any]
     os.replace(tmp, path)  # atomic on the same filesystem
 
 
-def load_checkpoint(path: str) -> ContextMemory:
+def load_checkpoint_with_meta(path: str) -> Tuple[ContextMemory, Dict[str, Any]]:
+    """Load both workflow context and checkpoint metadata.
+
+    ``load_checkpoint`` historically returned only ``ContextMemory`` and therefore
+    discarded the saved stage.  Keep that API for callers that only need context, while
+    the resumable SDK runner uses this richer form.
+    """
     with open(path, "r", encoding="utf-8") as f:
         payload = json.load(f)
     # Accept either {"meta":.., "context":..} or a bare context dict.
-    return context_from_dict(payload.get("context", payload))
+    if isinstance(payload, dict) and "context" in payload:
+        meta = payload.get("meta") or {}
+        return context_from_dict(payload["context"]), dict(meta) if isinstance(meta, dict) else {}
+    return context_from_dict(payload), {}
+
+
+def load_checkpoint(path: str) -> ContextMemory:
+    """Backward-compatible context-only checkpoint loader."""
+    context, _ = load_checkpoint_with_meta(path)
+    return context

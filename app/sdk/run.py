@@ -23,18 +23,12 @@ import os
 import sys
 
 from ..models import ContextMemory, ResearchGoal
-from .checkpoint import load_checkpoint, save_checkpoint
+from .checkpoint import load_checkpoint_with_meta, save_checkpoint
 from .loop import CoScientistWorkflow, ModelConfig, WorkflowConfig
+from .research_prompts import C2_FLATNESS_SEARCH_GOAL
 
-# Machine-verifiable goal from the setup doc (Sec. 3) -- written so its central claim
-# can eventually be checked numerically (the wedge for the verification layer).
-DEFAULT_GOAL = (
-    "Propose minimal tight-binding models (≤4 sites/cell, 2D, nearest- and next-nearest-neighbor hopping) "
-    "hosting an exactly or nearly flat band (bandwidth < 0.05t) with Chern number C=2 or C=-2. "
-    "C=1 flat Chern bands are well-catalogued (checkerboard, decorated honeycomb); C=2 is much rarer. "
-    "For each model, provide a tight_binding spec with flat_band + chern_number claims so the verifier "
-    "can confirm. Prefer models with a realization pathway in cold atoms or 2D materials."
-)
+# Importable, verifier-aware default research goal.
+DEFAULT_GOAL = C2_FLATNESS_SEARCH_GOAL
 
 RESULTS_DIR = "results"
 
@@ -87,11 +81,33 @@ async def _run(args, ckpt_path: str) -> dict:
         max_debate_pairs=args.max_debate_pairs,
         models=models,
     )
-    goal = ResearchGoal(description=args.goal)
-    context = load_checkpoint(args.resume) if args.resume else ContextMemory()
+    resume_meta = {}
+    if args.resume:
+        context, resume_meta = load_checkpoint_with_meta(args.resume)
+    else:
+        context = ContextMemory()
+
+    # A resumed partial cycle must use the goal that created it unless the caller
+    # explicitly supplied a different --goal.  This also keeps older checkpoints usable
+    # after DEFAULT_GOAL changes between releases.
+    saved_goal = resume_meta.get("goal") if isinstance(resume_meta, dict) else None
+    effective_goal = saved_goal if args.resume and saved_goal and args.goal == DEFAULT_GOAL else args.goal
+    goal = ResearchGoal(description=effective_goal)
+    resume_state = resume_meta.get("workflow_state") if isinstance(resume_meta, dict) else None
+
+    workflow = None
 
     def _cb(ctx: ContextMemory, stage: str) -> None:
-        save_checkpoint(ckpt_path, ctx, meta={"goal": args.goal, "stage": stage})
+        save_checkpoint(
+            ckpt_path,
+            ctx,
+            meta={
+                "goal": effective_goal,
+                "stage": stage,
+                "error": None,
+                "workflow_state": workflow.resume_state if workflow is not None else {},
+            },
+        )
 
     workflow = CoScientistWorkflow(config, checkpoint_cb=_cb)
 
@@ -101,19 +117,32 @@ async def _run(args, ckpt_path: str) -> dict:
     cycles: list = []
     error = None
     try:
-        for _ in range(args.cycles):
-            cycles.append(await workflow.run_cycle(goal, context))
+        for cycle_index in range(args.cycles):
+            state = resume_state if cycle_index == 0 else None
+            cycles.append(await workflow.run_cycle(goal, context, resume_state=state))
     except (Exception, KeyboardInterrupt) as exc:  # save partial work on ANY interruption
         error = f"{type(exc).__name__}: {exc}"
         logging.getLogger("coscientist.sdk").error("Run interrupted: %s", error)
 
-    # Always persist a final checkpoint with whatever we have.
-    save_checkpoint(ckpt_path, context, meta={"goal": args.goal, "stage": "final", "error": error})
+    # Always persist a final checkpoint with both data and the exact in-flight position.
+    # Do not overwrite the useful stage with the old generic value "final".
+    final_state = workflow.resume_state
+    final_stage = final_state.get("phase", "complete" if error is None else "unknown")
+    save_checkpoint(
+        ckpt_path,
+        context,
+        meta={
+            "goal": effective_goal,
+            "stage": final_stage,
+            "error": error,
+            "workflow_state": final_state,
+        },
+    )
 
     ranked = sorted(context.get_active_hypotheses(), key=lambda h: h.elo_score, reverse=True)
     return {
         "mode": "cycles",
-        "goal": args.goal,
+        "goal": effective_goal,
         "completed": error is None,
         "error": error,
         "checkpoint": ckpt_path,
